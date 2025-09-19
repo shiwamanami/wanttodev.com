@@ -30,53 +30,17 @@ export const ContactForm: React.FC = () => {
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = (e: React.FormEvent) => {
+    // Netlify Formsは自動的に処理されるため、preventDefaultは呼ばない
     setIsSubmitting(true);
     setSubmitStatus("idle");
 
-    try {
-      // Netlify Forms用のフォームデータを作成
-      const formDataToSend = new FormData();
-      formDataToSend.append("form-name", "contact");
-      formDataToSend.append("name", formData.name);
-      formDataToSend.append("email", formData.email);
-      formDataToSend.append("company", formData.company || "");
-      formDataToSend.append("message", formData.message);
-
-      console.log("送信データ:", Object.fromEntries(formDataToSend));
-
-      // Netlify Formsに送信（URLSearchParamsを使用）
-      const params = new URLSearchParams();
-      params.append("form-name", "contact");
-      params.append("name", formData.name);
-      params.append("email", formData.email);
-      params.append("company", formData.company || "");
-      params.append("message", formData.message);
-
-      const response = await fetch("/", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: params.toString(),
-      });
-
-      console.log("レスポンスステータス:", response.status);
-      console.log("レスポンスOK:", response.ok);
-
-      if (response.ok) {
-        setSubmitStatus("success");
-        setFormData({ name: "", email: "", company: "", message: "" });
-      } else {
-        const errorText = await response.text();
-        console.error("エラーレスポンス:", errorText);
-        setSubmitStatus("error");
-      }
-    } catch (error) {
-      console.error("送信エラー:", error);
-      setSubmitStatus("error");
-    } finally {
+    // フォーム送信後、少し待ってから状態を更新
+    setTimeout(() => {
+      setSubmitStatus("success");
+      setFormData({ name: "", email: "", company: "", message: "" });
       setIsSubmitting(false);
-    }
+    }, 1000);
   };
 
   return (
@@ -111,6 +75,7 @@ export const ContactForm: React.FC = () => {
             data-netlify-honeypot="bot-field"
             onSubmit={handleSubmit}
             className="space-y-6"
+            action="/contact.html"
           >
             {/* Netlify Forms用の隠しフィールド */}
             <input type="hidden" name="form-name" value="contact" />

@@ -62,7 +62,7 @@ const Cta: React.FC = () => {
           <div className="group">
             <a
               className="flex flex-col bg-white border border-gray-200 rounded hover:bg-transparent transition-all group-hover:shadow-[0_0_5px_rgba(255,255,255,0.8)]"
-              href={`tel:${mainData.contact.telFukuoka}`}
+              href={`tel:${mainData.contact.tel}`}
             >
               <div className="p-4 md:p-5">
                 <div className="flex justify-between items-center gap-x-3">
@@ -83,7 +83,7 @@ const Cta: React.FC = () => {
                       <div className="grow [&_p]:text-black space-y-2">
                         <p className="group-hover:">お電話でお問い合わせ</p>
                         <p className="text-lg xs:text-xl md:text-2xl font-semibold group-hover:text-yellow-400 transition-all">
-                          {mainData.contact.telFukuoka}
+                          {mainData.contact.tel}
                         </p>
                         <p className="group-hover: text-xs md:text-sm !leading-normal">
                           受付時間：{mainData.contact.hours}

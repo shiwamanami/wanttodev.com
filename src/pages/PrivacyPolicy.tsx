@@ -19,7 +19,7 @@ const PrivacyPolicy: React.FC = () => {
           <div className="privacy max-w-3xl mx-auto bg-gray-800/80 p-8 rounded-lg border border-gray-700">
             <div>
               <p>
-                {mainData.siteName}を運営する{mainData.companyName}
+                {mainData.siteName}を運営する{mainData.representative}
                 （以下、「当社」といいます。）は、本ウェブサイト上で提供するサービス（以下,「本サービス」といいます。）におけるプライバシー情報の取扱いについて、以下のとおりプライバシーポリシー（以下、「本ポリシー」といいます。）を定めます。
               </p>
             </div>
@@ -163,7 +163,7 @@ const PrivacyPolicy: React.FC = () => {
                     </td>
                   </tr> */}
                   <tr>
-                    <th>名前</th>
+                    <th>代表</th>
                     <td>{mainData.representative}</td>
                   </tr>
                   <tr>
@@ -187,3 +187,4 @@ const PrivacyPolicy: React.FC = () => {
 };
 
 export default PrivacyPolicy;
+export {};

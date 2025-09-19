@@ -82,12 +82,10 @@ export const BlogArticleLayout = ({
           </article>
 
           <div className="md:w-1/4">
-            {/* 固定サイドバー */}
             <div className="sticky top-20 space-y-6">
-              {/* 目次 */}
               {showTableOfContents && sectionTitles.length > 0 && (
                 <div className="bg-gray-800/80 border border-gray-700 rounded-lg p-4">
-                  <h3 className="text-lg font-bold text-white mb-4 text-center">
+                  <h3 className="text-base font-bold text-white mb-4 text-center">
                     目 次
                   </h3>
                   <ul className="space-y-4 [&_a]:text-sm">

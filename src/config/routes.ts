@@ -10,8 +10,8 @@ export interface RouteConfig {
 export const routeConfigs: RouteConfig[] = [
   {
     path: "/",
-    title: "ホーム",
-    description: "WantToDev - 開発者向けプラットフォーム",
+    title: "My Portfolio",
+    description: "WantToDev - My Portfolio",
   },
   {
     path: "/about",
@@ -24,14 +24,19 @@ export const routeConfigs: RouteConfig[] = [
     description: "Webアプリケーション、モバイルアプリ、デザインの制作実績",
   },
   {
+    path: "/works/:id",
+    title: "制作実績詳細",
+    description: "制作実績の詳細情報",
+  },
+  {
     path: "/blog",
     title: "ブログ",
-    description: "WantToDevの技術ブログ",
+    description: "技術ブログ",
   },
   {
     path: "/privacy-policy",
     title: "プライバシーポリシー",
-    description: "WantToDevのプライバシーポリシー",
+    description: "プライバシーポリシー",
   },
 ];
 

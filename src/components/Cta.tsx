@@ -11,7 +11,7 @@ const Cta: React.FC = () => {
         </h2>
 
         <p className="text-center mb-10 md:mb-16 !-mt-5">
-          ご質問やご相談がございましたら、お気軽にお問い合わせください。
+          お仕事のご相談や技術的な質問がございましたら、お気軽にお問い合わせください。
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-3">

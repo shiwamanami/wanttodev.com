@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "../components/Button";
 import Cta from "../components/Cta";
+import BasicAuth from "../components/BasicAuth";
+import { useAuth } from "../hooks/useAuth";
 
 // 仮の制作実績データ
 const worksData = [
@@ -71,41 +73,89 @@ const worksData = [
 ];
 
 export default function Works() {
+  const { isAuthenticated, isLoading, login, logout } = useAuth();
+  const [showAuthModal, setShowAuthModal] = useState(false);
+
+  // 認証が必要な場合の処理
+  if (isLoading) {
+    return (
+      <div className="flex min-h-screen flex-col relative">
+        <main className="flex-1 flex items-center justify-center">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-yellow-300 mx-auto mb-4"></div>
+            <p className="text-gray-300">読み込み中...</p>
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  // 認証されていない場合は認証モーダルを表示
+  if (!isAuthenticated) {
+    return (
+      <div className="flex min-h-screen flex-col relative">
+        <main className="flex-1 flex items-center justify-center">
+          <div className="text-center">
+            <h1 className="text-4xl font-bold text-white mb-4">制作実績</h1>
+            <p className="text-gray-300 mb-8">
+              このページにアクセスするには認証が必要です。
+            </p>
+            <Button onClick={() => setShowAuthModal(true)}>認証する</Button>
+          </div>
+        </main>
+        {showAuthModal && (
+          <BasicAuth
+            onAuthSuccess={() => {
+              setShowAuthModal(false);
+              login();
+            }}
+            onAuthCancel={() => setShowAuthModal(false)}
+          />
+        )}
+      </div>
+    );
+  }
+
   return (
     <div className="flex min-h-screen flex-col relative">
       <main className="flex-1">
-        <section className="container max-w-6xl py-24 sm:py-28 md:py-40">
-          <h2>
-            WORKS
-            <span>制作実績</span>
-          </h2>
+        <section className="container max-w-6xl py-10 sm:py-20">
+          <div className="flex justify-between items-center mb-8">
+            <h2>
+              WORKS
+              <span>制作実績</span>
+            </h2>
+            <Button variant="outline" onClick={logout} className="text-sm">
+              ログアウト
+            </Button>
+          </div>
 
           <div className="max-w-7xl mx-auto">
-            {/* カテゴリフィルター */}
             <div className="flex flex-wrap justify-center gap-4 mb-12">
               <button className="px-6 py-2 bg-yellow-300 text-gray-900 rounded-full font-semibold hover:bg-yellow-400 transition-colors">
                 すべて
               </button>
               <button className="px-6 py-2 bg-gray-700 text-gray-300 rounded-full font-semibold hover:bg-gray-600 transition-colors">
-                Webアプリケーション
+                HP / ホームページ
               </button>
               <button className="px-6 py-2 bg-gray-700 text-gray-300 rounded-full font-semibold hover:bg-gray-600 transition-colors">
-                モバイルアプリ
+                LP / ランディングページ
               </button>
               <button className="px-6 py-2 bg-gray-700 text-gray-300 rounded-full font-semibold hover:bg-gray-600 transition-colors">
-                Webサイト
+                EC / エレクトリックコマース
               </button>
               <button className="px-6 py-2 bg-gray-700 text-gray-300 rounded-full font-semibold hover:bg-gray-600 transition-colors">
-                デザイン
+                グラフィックデザイン
               </button>
             </div>
 
             {/* 制作実績グリッド */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {worksData.map((work) => (
-                <div
+                <Link
                   key={work.id}
-                  className="bg-gray-800/80 backdrop-blur-sm rounded-lg overflow-hidden border border-gray-700 hover:border-yellow-300/50 transition-all duration-300 group"
+                  to={`/works/${work.id}`}
+                  className="bg-gray-800/80 backdrop-blur-sm rounded-lg overflow-hidden border border-gray-700 hover:border-yellow-300/50 transition-all duration-300 group block"
                 >
                   {/* 画像プレースホルダー */}
                   <div className="aspect-video bg-gradient-to-br from-gray-700 to-gray-600 flex items-center justify-center">
@@ -118,25 +168,19 @@ export default function Works() {
                   </div>
 
                   <div className="p-6">
-                    {/* カテゴリと年 */}
+                    ¥
                     <div className="flex justify-between items-center mb-3">
                       <span className="text-xs font-semibold text-yellow-300 bg-yellow-300/20 px-3 py-1 rounded-full">
                         {work.category}
                       </span>
                       <span className="text-sm text-gray-400">{work.year}</span>
                     </div>
-
-                    {/* タイトル */}
                     <h3 className="text-xl font-bold text-white mb-3 group-hover:text-yellow-300 transition-colors">
                       {work.title}
                     </h3>
-
-                    {/* 説明 */}
                     <p className="text-gray-300 text-sm mb-4 leading-relaxed">
                       {work.description}
                     </p>
-
-                    {/* 技術スタック */}
                     <div className="flex flex-wrap gap-2 mb-4">
                       {work.technologies.map((tech, index) => (
                         <span
@@ -147,49 +191,19 @@ export default function Works() {
                         </span>
                       ))}
                     </div>
-
-                    {/* リンクボタン */}
                     <div className="flex gap-2">
-                      <a
-                        href={work.link}
+                      <Link
+                        to={`/works/${work.id}`}
                         className="flex-1 bg-yellow-300 text-gray-900 text-center py-2 px-4 rounded font-semibold hover:bg-yellow-400 transition-colors text-sm"
                       >
                         詳細を見る
-                      </a>
-                      <a
-                        href={work.link}
-                        className="bg-gray-700 text-gray-300 py-2 px-4 rounded hover:bg-gray-600 transition-colors text-sm"
-                      >
-                        GitHub
-                      </a>
+                      </Link>
                     </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
 
-            {/* お問い合わせセクション */}
-            <div className="mt-20 text-center">
-              <div className="bg-gray-800/80 backdrop-blur-sm p-8 rounded-lg border border-gray-700 max-w-2xl mx-auto">
-                <h3 className="text-2xl font-bold text-white mb-4">
-                  お仕事のご相談
-                </h3>
-                <p className="text-gray-300 mb-6">
-                  新しいプロジェクトのご相談や、既存のプロジェクトの改善について
-                  お気軽にお問い合わせください。
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Link to="/about">
-                    <Button>プロフィールを見る</Button>
-                  </Link>
-                  <Link to="/#contact">
-                    <Button variant="outline">お問い合わせ</Button>
-                  </Link>
-                </div>
-              </div>
-            </div>
-
-            {/* 戻るボタン */}
             <div className="mt-12 text-center">
               <Link to="/">
                 <Button variant="outline">TOPへ戻る</Button>

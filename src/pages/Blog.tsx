@@ -22,7 +22,7 @@ export default function BlogPage() {
   return (
     <div className="flex min-h-screen flex-col relative">
       <main className="flex-1">
-        <section className="container max-w-6xl py-24 sm:py-28 md:py-40">
+        <section className="container max-w-6xl py-10 sm:py-20">
           <h2>
             BLOG
             <span>ブログ</span>

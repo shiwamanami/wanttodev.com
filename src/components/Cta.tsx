@@ -11,12 +11,7 @@ const Cta: React.FC = () => {
         </h2>
 
         <p className="text-center mb-10 md:mb-16 !-mt-5">
-          店舗やイベントの集客に、{mainData.keyWords}
-          という選択肢。
-          <br />
-          動画制作だけでも、LEDディスプレイ導入、施工とのセットでもご対応可能です。
-          <br />
-          まずは無料相談からお気軽にお問い合わせください。
+          ご質問やご相談がございましたら、お気軽にお問い合わせください。
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-3">
@@ -31,17 +26,10 @@ const Cta: React.FC = () => {
                 <div className="flex justify-between gap-x-3">
                   <div className="grow">
                     <div className="flex justify-center items-center gap-x-3 md:gap-x-5">
-                      <div className="relative w-12 h-12 md:w-14 md:h-14">
-                        <img
-                          src="/images/icons/mail-dark.svg"
-                          alt="メールでお問合せ"
-                          className="w-full h-full absolute transition-opacity duration-300 group-hover:opacity-0"
-                        />
-                        <img
-                          src="/images/icons/mail-white.svg"
-                          alt="メールでお問合せ"
-                          className="w-full h-full absolute opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                        />
+                      <div className="relative w-12 h-12 md:w-14 md:h-14 flex items-center justify-center">
+                        <span className="material-icons text-4xl md:text-5xl text-gray-600 transition-colors duration-300 group-hover:text-white">
+                          email
+                        </span>
                       </div>
                       <div className="grow [&_p]:text-black space-y-2">
                         <p className="group-hover:">メールでお問合せ</p>
@@ -68,17 +56,10 @@ const Cta: React.FC = () => {
                 <div className="flex justify-between items-center gap-x-3">
                   <div className="grow">
                     <div className="flex justify-center items-center gap-x-3 md:gap-x-5">
-                      <div className="relative w-12 h-12 md:w-14 md:h-14">
-                        <img
-                          src="/images/icons/phone-dark.svg"
-                          alt="お電話でのお問い合わせ"
-                          className="w-full h-full absolute transition-opacity duration-300 group-hover:opacity-0"
-                        />
-                        <img
-                          src="/images/icons/phone-white.svg"
-                          alt="お電話でのお問い合わせ"
-                          className="w-full h-full absolute opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                        />
+                      <div className="relative w-12 h-12 md:w-14 md:h-14 flex items-center justify-center">
+                        <span className="material-icons text-4xl md:text-5xl text-gray-600 transition-colors duration-300 group-hover:text-white">
+                          phone
+                        </span>
                       </div>
                       <div className="grow [&_p]:text-black space-y-2">
                         <p className="group-hover:">お電話でお問い合わせ</p>

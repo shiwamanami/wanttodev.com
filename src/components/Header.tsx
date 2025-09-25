@@ -4,7 +4,7 @@ import logo from "../logo.svg";
 
 const Header: React.FC = () => {
   return (
-    <nav className="bg-gray-800 shadow-lg sticky top-0 z-50">
+    <nav className="bg-gray-800/5 sticky top-0 z-50">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center px-4 md:px-8 py-4">
         <Link
           to="/"

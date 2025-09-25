@@ -5,7 +5,7 @@ import Cta from "../components/Cta";
 
 export default function About() {
   return (
-    <div className="flex min-h-screen flex-col relative bg-gray-900">
+    <div className="flex min-h-screen flex-col relative">
       <main className="flex-1">
         <section className="container max-w-6xl py-24 sm:py-28 md:py-40">
           <h2>
@@ -17,7 +17,7 @@ export default function About() {
             <div className="bg-gray-800/80 backdrop-blur-sm p-8 md:p-12 rounded-lg mb-12 border border-gray-700">
               <div className="text-center mb-8">
                 <div className="w-32 h-32 mx-auto mb-6 bg-gradient-to-br from-yellow-300 to-orange-400 rounded-full flex items-center justify-center">
-                  <span className="text-4xl font-bold text-gray-800">A</span>
+                  <span className="text-4xl font-bold text-gray-800">M</span>
                 </div>
                 <h3 className="text-2xl md:text-3xl font-bold text-yellow-300 mb-4">
                   開発者・デザイナー
@@ -99,15 +99,10 @@ export default function About() {
               </div>
             </div>
 
-            <div className="text-center space-y-4">
-              <Link to="/blog">
-                <Button>ブログを見る</Button>
+            <div className="text-center">
+              <Link to="/">
+                <Button variant="outline">TOPへ戻る</Button>
               </Link>
-              <div>
-                <Link to="/">
-                  <Button variant="outline">TOPへ戻る</Button>
-                </Link>
-              </div>
             </div>
           </div>
         </section>

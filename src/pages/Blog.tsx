@@ -1,9 +1,12 @@
 import { Link, useSearchParams } from "react-router-dom";
+import { useState } from "react";
 
 import { Button } from "../components/Button";
 import Cta from "../components/Cta";
 import { BlogList } from "../components/blog/BlogList";
 import { CategoryList } from "../components/blog/CategoryList";
+import BasicAuth from "../components/BasicAuth";
+import { useBlogAuth } from "../hooks/useAuth";
 
 import { blogData } from "../data/blog";
 
@@ -12,6 +15,8 @@ import { blogData } from "../data/blog";
 export default function BlogPage() {
   const [searchParams] = useSearchParams();
   const selectedCategory = searchParams.get("category");
+  const { isAuthenticated, isLoading, login, logout } = useBlogAuth();
+  const [showAuthModal, setShowAuthModal] = useState(false);
 
   // カテゴリでフィルタリング
   const filteredPosts = blogData.filter((post) => {
@@ -19,14 +24,62 @@ export default function BlogPage() {
     return post.isVisible && post.category.includes(selectedCategory);
   });
 
+  // 認証が必要な場合の処理
+  if (isLoading) {
+    return (
+      <div className="flex min-h-screen flex-col relative">
+        <main className="flex-1 flex items-center justify-center">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500 mx-auto mb-4"></div>
+            <p className="text-gray-300">読み込み中...</p>
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  // 認証されていない場合は認証モーダルを表示
+  if (!isAuthenticated) {
+    return (
+      <div className="flex min-h-screen flex-col relative">
+        <main className="flex-1 flex items-center justify-center">
+          <div className="text-center">
+            <h2>
+              BLOG
+              <span>ブログ</span>
+            </h2>
+            <p className="mb-10 md:mb-20">
+              このページにアクセスするにはログインが必要です。
+            </p>
+            <Button onClick={() => setShowAuthModal(true)}>ログイン</Button>
+          </div>
+        </main>
+        {showAuthModal && (
+          <BasicAuth
+            onAuthSuccess={() => {
+              setShowAuthModal(false);
+              login();
+            }}
+            onAuthCancel={() => setShowAuthModal(false)}
+          />
+        )}
+      </div>
+    );
+  }
+
   return (
     <div className="flex min-h-screen flex-col relative">
       <main className="flex-1">
         <section className="container max-w-6xl py-10 sm:py-20">
-          <h2>
-            BLOG
-            <span>ブログ</span>
-          </h2>
+          <div className="flex justify-between items-center mb-8">
+            <h2>
+              BLOG
+              <span>ブログ</span>
+            </h2>
+            <Button variant="outline" onClick={logout} className="text-sm">
+              ログアウト
+            </Button>
+          </div>
 
           {selectedCategory && (
             <div className="mb-8">

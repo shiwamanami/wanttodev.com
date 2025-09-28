@@ -15,7 +15,7 @@ const Home: React.FC = () => {
       <section className="container max-w-5xl mx-auto px-4 mb-16 md:mb-80">
         <div className="grid md:grid-cols-2 gap-8 md:gap-20">
           <Link to="/works">
-            <div className="border border-white/40 p-10 hover:bg-gray-800/90 text-center transition-colors duration-300">
+            <div className="border border-white/40 p-10 hover:bg-white/10 text-center transition-colors duration-300">
                 <div className="flex items-center justify-center mx-auto mb-4 md:mb-10">
                   <span className="material-icons text-white text-4xl md:text-5xl">
                     work
@@ -29,7 +29,7 @@ const Home: React.FC = () => {
           </Link>
 
           <Link to="/blog">
-            <div className="border border-white/40 p-10 hover:bg-gray-800/90 text-center transition-colors duration-300">
+            <div className="border border-white/40 p-10 hover:bg-white/10 text-center transition-colors duration-300">
                 <div className="flex items-center justify-center mx-auto mb-4 md:mb-10">
                   <span className="material-icons text-white text-4xl md:text-5xl">
                     article

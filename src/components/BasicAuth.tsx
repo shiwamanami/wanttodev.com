@@ -32,8 +32,12 @@ export default function BasicAuth({
       password === validCredentials.password
     ) {
       // 認証成功時はローカルストレージに認証状態を保存
-      localStorage.setItem("works_auth", "true");
-      localStorage.setItem("works_auth_timestamp", Date.now().toString());
+      // 現在のURLに基づいて適切な認証キーを設定
+      const isBlogPage = window.location.pathname.includes('/blog');
+      const authKey = isBlogPage ? "blog_auth" : "works_auth";
+      
+      localStorage.setItem(authKey, "true");
+      localStorage.setItem(`${authKey}_timestamp`, Date.now().toString());
       onAuthSuccess();
     } else {
       setError("ユーザー名またはパスワードが正しくありません。");

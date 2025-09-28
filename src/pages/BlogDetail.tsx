@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams, Navigate } from "react-router-dom";
 import { BlogArticleLayout } from "../components/blog/BlogArticleLayout";
 import { DynamicSections } from "../components/blog/DynamicSections";
+import BasicAuth from "../components/BasicAuth";
+import { useBlogAuth } from "../hooks/useAuth";
 import { blogData } from "../data/blog";
 
 export default function BlogDetail() {
   const { slug } = useParams<{ slug: string }>();
+  const { isAuthenticated, isLoading, login, logout } = useBlogAuth();
+  const [showAuthModal, setShowAuthModal] = useState(false);
 
   // slugに基づいて記事を検索
   const article = blogData.find((post) => post.slug === slug);
@@ -18,6 +22,54 @@ export default function BlogDetail() {
   // セクションタイトルを抽出（目次用）
   const sectionTitles =
     article.sections?.map((section) => section.title).filter(Boolean) || [];
+
+  // 認証が必要な場合の処理
+  if (isLoading) {
+    return (
+      <div className="flex min-h-screen flex-col relative">
+        <main className="flex-1 flex items-center justify-center">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500 mx-auto mb-4"></div>
+            <p className="text-gray-300">読み込み中...</p>
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  // 認証されていない場合は認証モーダルを表示
+  if (!isAuthenticated) {
+    return (
+      <div className="flex min-h-screen flex-col relative">
+        <main className="flex-1 flex items-center justify-center">
+          <div className="text-center">
+            <h2>
+              BLOG
+              <span>ブログ</span>
+            </h2>
+            <p className="mb-10 md:mb-20">
+              このページにアクセスするにはログインが必要です。
+            </p>
+            <button 
+              onClick={() => setShowAuthModal(true)}
+              className="px-6 py-3 bg-primary-500 text-white rounded-lg font-semibold hover:bg-primary-600 transition-colors"
+            >
+              ログイン
+            </button>
+          </div>
+        </main>
+        {showAuthModal && (
+          <BasicAuth
+            onAuthSuccess={() => {
+              setShowAuthModal(false);
+              login();
+            }}
+            onAuthCancel={() => setShowAuthModal(false)}
+          />
+        )}
+      </div>
+    );
+  }
 
   return (
     <BlogArticleLayout

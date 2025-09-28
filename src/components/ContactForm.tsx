@@ -46,7 +46,7 @@ export const ContactForm: React.FC = () => {
   return (
     <section className="py-16">
       <div className="container max-w-3xl mx-auto px-4">
-        <div className="text-center mb-12">
+        <div className="text-center mb-12 md:mb-16">
         <h2>
               CONTACT
               <span>お問い合わせ</span>
@@ -54,7 +54,7 @@ export const ContactForm: React.FC = () => {
           <p>ご質問やご相談がございましたら、お気軽にお問い合わせください。</p>
         </div>
 
-        <div className="bg-gray-800/80 border border-gray-700 rounded-lg p-8">
+        <div className="bg-transparent border border-white/40 p-8 md:p-16">
           {submitStatus === "success" && (
             <div className="mb-6 p-4 bg-green-900/50 border border-green-700 rounded-lg text-green-300">
               お問い合わせありがとうございます。内容を確認の上、2営業日以内にご返信いたします。
@@ -73,21 +73,21 @@ export const ContactForm: React.FC = () => {
             data-netlify="true"
             data-netlify-honeypot="bot-field"
             onSubmit={handleSubmit}
-            className="space-y-6"
             action="/contact.html"
           >
-            {/* Netlify Forms用の隠しフィールド */}
+            <div className="space-y-6 md:space-y-10 mb-6 md:mb-20">
             <input type="hidden" name="form-name" value="contact" />
             <div style={{ display: "none" }}>
               <label>
                 Don't fill this out if you're human: <input name="bot-field" />
               </label>
             </div>
-            <div className="grid md:grid-cols-2 gap-6">
+
+            <div className="grid md:grid-cols-2 gap-4">
               <div>
                 <label
                   htmlFor="name"
-                  className="block text-sm font-medium text-gray-300 mb-2"
+                  className="block text-sm text-start mb-2"
                 >
                   お名前 <span className="text-red-400">*</span>
                 </label>
@@ -98,7 +98,7 @@ export const ContactForm: React.FC = () => {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                  className="w-full px-4 py-3 bg-gray-500/60 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                   placeholder="山田太郎"
                 />
               </div>
@@ -106,7 +106,7 @@ export const ContactForm: React.FC = () => {
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-sm font-medium text-gray-300 mb-2"
+                  className="block text-sm text-start mb-2"
                 >
                   メールアドレス <span className="text-red-400">*</span>
                 </label>
@@ -117,7 +117,7 @@ export const ContactForm: React.FC = () => {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                  className="w-full px-4 py-3 bg-gray-500/60 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                   placeholder="example@email.com"
                 />
               </div>
@@ -126,7 +126,7 @@ export const ContactForm: React.FC = () => {
             <div>
               <label
                 htmlFor="company"
-                className="block text-sm font-medium text-gray-300 mb-2"
+                className="block text-sm text-start mb-2"
               >
                 会社名・団体名
               </label>
@@ -136,15 +136,15 @@ export const ContactForm: React.FC = () => {
                 name="company"
                 value={formData.company}
                 onChange={handleChange}
-                className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                placeholder="株式会社サンプル"
+                className="w-full px-4 py-3 bg-gray-500/60 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                placeholder="株式会社Sample"
               />
             </div>
 
             <div>
               <label
                 htmlFor="message"
-                className="block text-sm font-medium text-gray-300 mb-2"
+                className="block text-sm text-start mb-2"
               >
                 お問い合わせ内容 <span className="text-red-400">*</span>
               </label>
@@ -155,9 +155,10 @@ export const ContactForm: React.FC = () => {
                 onChange={handleChange}
                 required
                 rows={6}
-                className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-vertical"
+                className="w-full px-4 py-3 bg-gray-500/60 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-vertical"
                 placeholder="お問い合わせ内容をご記入ください"
               />
+            </div>
             </div>
 
             <div className="text-center">
@@ -171,7 +172,7 @@ export const ContactForm: React.FC = () => {
             </div>
           </form>
 
-          <div className="mt-8 text-center text-sm text-gray-400">
+          {/* <div className="mt-8 text-center text-sm text-gray-400">
             <p>
               お急ぎの場合は、お電話でもお問い合わせいただけます。
               <br />
@@ -183,7 +184,7 @@ export const ContactForm: React.FC = () => {
               </a>
               （平日・土日祝日 10時〜18時）
             </p>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>

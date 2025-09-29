@@ -18,13 +18,12 @@
 }
 
 body {
-  margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  @apply text-gray-100;
+  @apply text-gray-100 m-0;
 }
 
 main {
@@ -43,7 +42,7 @@ h2 {
 }
 
 h3 {
-  @apply font-mincho text-xl md:text-2xl lg:text-3xl font-bold text-center !tracking-wider;
+  @apply font-mincho text-2xl md:text-3xl font-bold !tracking-wider;
 }
 
 h4 {

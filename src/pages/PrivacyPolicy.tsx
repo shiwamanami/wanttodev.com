@@ -178,7 +178,7 @@ const PrivacyPolicy: React.FC = () => {
       </section>
 
       <Link to="/" className="mb-20 md:mb-40">
-        <Button variant="default">TOPへ戻る</Button>
+        <Button variant="default">Back to TOP</Button>
       </Link>
     </div>
   );

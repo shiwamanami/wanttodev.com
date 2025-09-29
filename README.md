@@ -147,5 +147,5 @@ npm start
 
 - Works ページ
   fullpage キャプチャ：　 PC サイズ W:1280px / SP サイズ W:800px
-  Thumbnail（16:9）：　横幅 1280px × 縦幅 720px
+  Thumbnail（16:9）：　 W:1280px × h:720px
   ※画像 1 枚あたり 150KB 以下が理想。超高解像度でも 500KB 以内に抑える。

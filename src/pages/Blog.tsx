@@ -1,16 +1,14 @@
 import { Link, useSearchParams } from "react-router-dom";
 import { useState } from "react";
+import { useBlogAuth } from "../hooks/useAuth";
 
+import BasicAuth from "../components/BasicAuth";
 import { Button } from "../components/Button";
 import Cta from "../components/Cta";
 import { BlogList } from "../components/blog/BlogList";
 import { CategoryList } from "../components/blog/CategoryList";
-import BasicAuth from "../components/BasicAuth";
-import { useBlogAuth } from "../hooks/useAuth";
 
 import { blogData } from "../data/blog";
-
-// Metadata型はNext.js用のため、React Routerプロジェクトでは削除
 
 export default function BlogPage() {
   const [searchParams] = useSearchParams();
@@ -118,7 +116,7 @@ export default function BlogPage() {
 
         <div className="mt-20 md:mt-28 text-center">
           <Link to="/">
-            <Button>TOPへ戻る</Button>
+            <Button>Back to TOP</Button>
           </Link>
         </div>
       </section>

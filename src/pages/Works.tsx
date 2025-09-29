@@ -10,6 +10,11 @@ import { worksData } from "../data/works";
 export default function Works() {
   const { isAuthenticated, isLoading, login, logout } = useAuth();
   const [showAuthModal, setShowAuthModal] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState("すべて");
+
+  const allCategories = Array.from(
+    new Set(worksData.flatMap((work) => work.category))
+  ).sort();
 
   // 認証が必要な場合の処理
   if (isLoading) {
@@ -64,80 +69,76 @@ export default function Works() {
           </Button>
         </div>
 
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-wrap justify-center gap-4 mb-12">
-            <button className="px-6 py-2 bg-primary-500 rounded-full font-semibold hover:bg-primary-600 transition-colors">
-              すべて
-            </button>
-            <button className="px-6 py-2 bg-gray-700 text-gray-300 rounded-full font-semibold hover:bg-gray-600 transition-colors">
-              HP / ホームページ
-            </button>
-            <button className="px-6 py-2 bg-gray-700 text-gray-300 rounded-full font-semibold hover:bg-gray-600 transition-colors">
-              LP / ランディングページ
-            </button>
-            <button className="px-6 py-2 bg-gray-700 text-gray-300 rounded-full font-semibold hover:bg-gray-600 transition-colors">
-              EC / エレクトリックコマース
-            </button>
-            <button className="px-6 py-2 bg-gray-700 text-gray-300 rounded-full font-semibold hover:bg-gray-600 transition-colors">
-              グラフィックデザイン
-            </button>
-          </div>
-
-          {/* 制作実績グリッド */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {worksData.map((work) => (
-              <Link
-                key={work.id}
-                to={`/works/${work.id}`}
-                className="bg-gray-800/80 backdrop-blur-sm rounded-lg overflow-hidden border border-gray-700 hover:border-primary-500/50 transition-all duration-300 group block"
+        <div>
+          <div className="flex flex-wrap gap-4 mb-12 md:mb-20">
+            {["すべて", ...allCategories].map((category) => (
+              <button
+                key={category}
+                onClick={() => setSelectedCategory(category)}
+                className={`px-6 py-2 rounded-full transition-colors ${
+                  selectedCategory === category
+                    ? "bg-primary-500 hover:bg-primary-600"
+                    : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+                }`}
               >
-                {/* 画像プレースホルダー */}
-                <div className="aspect-video bg-gradient-to-br from-gray-700 to-gray-600 flex items-center justify-center">
-                  <div className="text-center text-gray-400">
-                    <div className="w-16 h-16 mx-auto mb-2 bg-gray-600 rounded-lg flex items-center justify-center">
-                      <span className="text-2xl font-bold">W</span>
-                    </div>
-                    <p className="text-sm">画像プレースホルダー</p>
-                  </div>
-                </div>
-
-                <div className="p-6">
-                  ¥
-                  <div className="flex justify-between items-center mb-3">
-                    <span className="text-xs font-semibold text-primary-400 bg-primary-500/20 px-3 py-1 rounded-full">
-                      {work.category}
-                    </span>
-                    <span className="text-sm text-gray-400">{work.date}</span>
-                  </div>
-                  <h3 className="text-xl font-bold mb-3 group-hover:text-primary-400 transition-colors">
-                    {work.title}
-                  </h3>
-                  <p className="text-gray-300 text-sm mb-4 leading-relaxed">
-                    {work.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {work.technologies.map((tech, index) => (
-                      <span
-                        key={index}
-                        className="text-xs bg-gray-700 text-gray-300 px-2 py-1 rounded"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="flex gap-2">
-                    <Link to={`/works/${work.id}`} className="flex-1">
-                      <Button className="w-full text-sm">詳細を見る</Button>
-                    </Link>
-                  </div>
-                </div>
-              </Link>
+                {category}
+              </button>
             ))}
           </div>
 
-          <div className="mt-12 text-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20 md:mb-40">
+            {worksData
+              .filter(
+                (work) =>
+                  selectedCategory === "すべて" ||
+                  work.category.includes(selectedCategory)
+              )
+              .map((work) => (
+                <Link
+                  key={work.id}
+                  to={`/works/${work.id}`}
+                  className="backdrop-blur-sm overflow-hidden transition-all duration-300 group block"
+                >
+                  <div className="mb-4">
+                    <img
+                      src={`/images/works/${work.id}/thumbnail.webp`}
+                      alt={work.title}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+
+                  <div>
+                    <div className="mb-3">
+                      <div className="flex flex-wrap gap-2">
+                        {work.category.map((cat, index) => (
+                          <Link
+                            key={index}
+                            to={`/works?category=${cat}`}
+                            className="text-xs text-primary-500 border-b border-transparent hover:border-primary-500"
+                          >
+                            #{cat}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+
+                    <h3 className="text-lg md:text-xl mb-3 group-hover:text-primary-500 transition-colors">
+                      {work.title}
+                    </h3>
+
+                    {/* <div className="flex gap-2">
+                      <Link to={`/works/${work.id}`} className="flex-1">
+                        <Button className="w-full text-sm">詳細を見る</Button>
+                      </Link>
+                    </div> */}
+                  </div>
+                </Link>
+              ))}
+          </div>
+
+          <div className="text-center">
             <Link to="/">
-              <Button variant="outline">TOPへ戻る</Button>
+              <Button variant="outline">Back to TOP</Button>
             </Link>
           </div>
         </div>

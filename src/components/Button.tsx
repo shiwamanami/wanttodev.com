@@ -33,7 +33,7 @@ const Button = ({
           <button
             onClick={onClick}
             disabled={disabled}
-            className={`relative group overflow-hidden px-8 md:px-16 py-2.5 md:py-3 text-sm md:text-base rounded-lg border border-primary-500/30 uppercase tracking-wider transition-all duration-500 hover:bg-primary-500/10 hover:border-primary-400 whitespace-nowrap flex items-center gap-2 ${
+            className={`relative font-mincho group overflow-hidden px-8 md:px-16 py-2.5 md:py-3 text-sm md:text-base rounded-lg border border-primary-500/30 uppercase tracking-wider transition-all duration-500 hover:bg-primary-500/10 hover:border-primary-400 whitespace-nowrap flex items-center gap-2 ${
               className || ""
             } ${disabled ? "opacity-50 cursor-not-allowed" : ""}`}
             onMouseEnter={() => !disabled && setIsHovered(true)}

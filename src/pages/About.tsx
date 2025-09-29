@@ -7,6 +7,9 @@ import {
   backendSkills,
   designSkills,
   otherSkills,
+  cmsSkills,
+  ecSkills,
+  marketingSkills,
 } from "../data/skills";
 
 export default function About() {
@@ -22,129 +25,186 @@ export default function About() {
           <span>私について</span>
         </h2>
 
-        <div className="max-w-4xl mx-auto">
-          <div className="bg-transparent backdrop-blur-sm p-8 md:p-20 mb-12 md:mb-20 border border-white/40">
-            <div className="text-center mb-8 md:mb-20">
-              <div className="w-28 h-28 mx-auto mb-6 bg-gradient-to-br from-primary-400 to-primary-600 rounded-full flex items-center justify-center">
-                <span className="text-4xl md:text-5xl font-bold text-gray-800">
-                  M
-                </span>
-              </div>
-              <h3 className="text-2xl md:text-3xl font-bold mb-4 md:mb-8">
-                フロントエンドエンジニア/プログラマー/デザイナー
-              </h3>
-              <p>
-                「見た目の美しさ」と「使いやすさ」を両立させたWeb制作をモットーに、デザインから開発までワンストップで提供。
-                <br />
-                ビジネス課題を理解し、成果につながるクリエイティブをご提案いたします。
-              </p>
+        <div className="mb-40 md:mb-60">
+          <div className="text-center mb-20 md:mb-40">
+            <div className="w-20 md:w-28 h-20 md:h-28 mx-auto mb-6 bg-gradient-to-br from-primary-400 to-primary-600 rounded-full flex items-center justify-center">
+              <span className="text-4xl md:text-5xl font-bold text-gray-800">
+                M
+              </span>
             </div>
+            <h3 className="mb-4 md:mb-20">プログラマー / WEBデザイナー</h3>
+            <p>
+              「見た目の美しさ」と「使いやすさ」を両立させたWeb制作をモットーに、デザインから開発までワンストップで提供。
+              <br />
+              ビジネス課題を理解し、成果につながるクリエイティブをご提案いたします。
+            </p>
+          </div>
 
-            <div className="space-y-6 md:space-y-20">
-              <div className="space-y-6 md:space-y-20">
-                <h4 className="text-xl text-primary-500 mb-3">経歴</h4>
+          <div className="space-y-20 md:space-y-40">
+            <div className="flex flex-col md:flex-row gap-8 md:gap-20">
+              <h3 className="md:w-1/6 text-primary-500 text-nowrap">
+                Career
+                <span className="block text-sm md:text-base text-gray-300">
+                  経歴
+                </span>
+              </h3>
+              <div className="md:w-5/6 space-y-10 md:space-y-20">
                 <div>
-                  <p className="font-bold mb-3">
+                  <h4 className="font-bold mb-3 md:mb-5">
                     2023年(令和5年) – {new Date().getFullYear()}年(令和
                     {reiwaYear}年) 現在
-                  </p>
-                  <p>
-                    WEB制作会社にてWebデザイナー／フロントエンドエンジニアとして勤務
+                  </h4>
+
+                  <p className="md:ml-4">
+                    WEB制作会社にて<strong>プログラマ兼Webデザイナー</strong>
+                    として、
                     <br />
-                    コーポレートサイト、ECサイト、LPなど多数のWeb制作案件を担当。
-                    大手企業やスタートアップのWebサイトリニューアル案件に参画。
+                    コーポレートサイト、ECサイト、LPなど多様なWeb制作案件を多数担当。
                     <br />
-                    デザインからコーディング、WordPress構築、保守運用まで幅広く担当。
+                    UI/UX設計からデザイン、フロントエンド開発（HTML/CSS/JavaScript/React）、
+                    <br /> バックエンド構築（PHP・AWS・Node.js）まで
+                    <strong>ワンストップで実装</strong>。<br />
+                    WordPress構築や保守運用、SEO対策、広告計測設定などマーケティング施策も手掛け、
+                    <br /> デザインとエンジニアリングの両軸から
+                    <strong>成果につながるサイト改善</strong>を実現。
                     <br />
-                    UI/UX設計からデザイン、フロントエンド実装（HTML/CSS/JavaScript/React）、バックエンド構築（AWS,
-                    Node.js）まで一貫して対応。
-                    <br />
-                    SEO・広告運用を意識した集客型サイトや、リアルタイム機能を持つWebアプリの開発など、マーケティングを考慮した制作を得意とする。
-                    デザインとエンジニアリングを両立したサイト改善で、クライアントのCV率向上を実現。
+                    クライアントのCV(コンバージョン)率向上や運用効率化に貢献。
                   </p>
                 </div>
 
                 <div>
-                  <p className="font-bold mb-3">2022年(令和4年)</p>
-                  <p>
-                    独学でプログラミングを習得
+                  <h4 className="font-bold mb-3 md:mb-5">2022年(令和4年)</h4>
+                  <p className="md:ml-4">
+                    ゼロから独学でプログラミングを習得。
                     <br />
-                    プログラミングスキルをベースに、デザイン領域へ興味を持ち独学でWebデザインを習得
+                    エンジニアリングの基盤を築いた後、ユーザー体験向上のためデザイン領域も独学で習得
+                    <br />
+                    継続的な学習意欲と自己成長力で、技術とデザインの両軸で価値創造できるエンジニアとしての道を切り開く。
                   </p>
                 </div>
               </div>
+            </div>
 
-              <div>
-                <h4 className="text-xl text-primary-500 mb-3">スキル</h4>
-                <div className="space-y-6 md:space-y-20">
-                  <div>
-                    <h5 className="mb-4">フロントエンド</h5>
-                    <div className="grid md:grid-cols-6 gap-5 space-y-3">
-                      {frontendSkills.map((skill, index) => (
-                        <SkillItem
-                          key={index}
-                          name={skill.name}
-                          image={skill.image}
-                          alt={skill.alt}
-                          isSquare={skill.isSquare}
-                        />
-                      ))}
-                    </div>
+            <div className="flex flex-col md:flex-row gap-8 md:gap-20 text-nowrap">
+              <h3 className="md:w-1/6 text-primary-500 text-nowrap">
+                Skill
+                <span className="block text-sm md:text-base text-gray-300">
+                  スキル
+                </span>
+              </h3>
+              <div className="md:w-5/6 space-y-14 md:space-y-20">
+                <div>
+                  <h4 className="mb-4">フロントエンド</h4>
+                  <div className="flex flex-wrap gap-4 md:gap-8">
+                    {frontendSkills.map((skill, index) => (
+                      <SkillItem
+                        key={index}
+                        name={skill.name}
+                        image={skill.image}
+                        alt={skill.alt}
+                        isSquare={skill.isSquare}
+                      />
+                    ))}
                   </div>
-                  <div>
-                    <h5 className="mb-4">バックエンド</h5>
-                    <div className="grid md:grid-cols-6 gap-5 space-y-3">
-                      {backendSkills.map((skill, index) => (
-                        <SkillItem
-                          key={index}
-                          name={skill.name}
-                          image={skill.image}
-                          alt={skill.alt}
-                          isSquare={skill.isSquare}
-                        />
-                      ))}
-                    </div>
+                </div>
+                <div>
+                  <h4 className="mb-4">バックエンド</h4>
+                  <div className="flex flex-wrap gap-4 md:gap-8">
+                    {backendSkills.map((skill, index) => (
+                      <SkillItem
+                        key={index}
+                        name={skill.name}
+                        image={skill.image}
+                        alt={skill.alt}
+                        isSquare={skill.isSquare}
+                      />
+                    ))}
                   </div>
-                  <div>
-                    <h5 className="mb-4">デザイン</h5>
-                    <div className="grid md:grid-cols-6 gap-5 space-y-3">
-                      {designSkills.map((skill, index) => (
-                        <SkillItem
-                          key={index}
-                          name={skill.name}
-                          image={skill.image}
-                          alt={skill.alt}
-                          isSquare={skill.isSquare}
-                        />
-                      ))}
-                    </div>
+                </div>
+                <div>
+                  <h4 className="mb-4">デザイン</h4>
+                  <div className="flex flex-wrap gap-4 md:gap-8">
+                    {designSkills.map((skill, index) => (
+                      <SkillItem
+                        key={index}
+                        name={skill.name}
+                        image={skill.image}
+                        alt={skill.alt}
+                        isSquare={skill.isSquare}
+                      />
+                    ))}
                   </div>
-                  <div>
-                    <h5 className="mb-4">その他</h5>
-                    <div className="grid md:grid-cols-6 gap-5 space-y-3">
-                      {otherSkills.map((skill, index) => (
-                        <SkillItem
-                          key={index}
-                          name={skill.name}
-                          image={skill.image}
-                          alt={skill.alt}
-                          isSquare={skill.isSquare}
-                        />
-                      ))}
-                    </div>
+                </div>
+                <div>
+                  <h4 className="mb-4">その他</h4>
+                  <div className="flex flex-wrap gap-4 md:gap-8">
+                    {otherSkills.map((skill, index) => (
+                      <SkillItem
+                        key={index}
+                        name={skill.name}
+                        image={skill.image}
+                        alt={skill.alt}
+                        isSquare={skill.isSquare}
+                      />
+                    ))}
                   </div>
-                  <div>
-                    <h5 className="mb-4">マーケティング・広告運用</h5>
-                    Google Analytics / Google Tag Manager / Google Ads /
-                    Meta広告 (Facebook, Instagram) / Yahoo!広告 / LINE広告 /
-                    Adobe Analytics / Looker Studio（データポータル） -
-                    広告効果測定、タグ設定、コンバージョン計測、レポーティングまで対応可能
+                </div>
+
+                <div>
+                  <h4 className="mb-4">CMS</h4>
+                  <div className="flex flex-wrap gap-4 md:gap-8">
+                    {cmsSkills.map((skill, index) => (
+                      <SkillItem
+                        key={index}
+                        name={skill.name}
+                        image={skill.image}
+                        alt={skill.alt}
+                        isSquare={skill.isSquare}
+                      />
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <h4 className="mb-4">ECプラットフォーム 構築・運用</h4>
+                  <div className="flex flex-wrap gap-4 md:gap-8">
+                    {ecSkills.map((skill, index) => (
+                      <SkillItem
+                        key={index}
+                        name={skill.name}
+                        image={skill.image}
+                        alt={skill.alt}
+                        isSquare={skill.isSquare}
+                      />
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <h4 className="mb-4">マーケティング・広告運用</h4>
+                  <div className="flex flex-wrap gap-4 md:gap-8">
+                    {marketingSkills.map((skill, index) => (
+                      <SkillItem
+                        key={index}
+                        name={skill.name}
+                        image={skill.image}
+                        alt={skill.alt}
+                        isSquare={skill.isSquare}
+                      />
+                    ))}
                   </div>
                 </div>
               </div>
+            </div>
 
-              <div>
-                <h4 className="text-xl text-primary-500 mb-3">趣味・興味</h4>
+            <div className="flex flex-col md:flex-row gap-8 md:gap-20">
+              <h3 className="md:w-1/6 text-primary-500 text-nowrap">
+                Hobby
+                <span className="block text-sm md:text-base text-gray-300">
+                  趣味
+                </span>
+              </h3>
+              <div className="md:w-5/6">
                 <p>
                   新しい技術の学習、個人開発、テックブログを読むこと、読書、カフェオレを飲みながらのコーディングが好きです。
                   <br />
@@ -153,12 +213,12 @@ export default function About() {
               </div>
             </div>
           </div>
+        </div>
 
-          <div className="text-center">
-            <Link to="/">
-              <Button variant="outline">TOPへ戻る</Button>
-            </Link>
-          </div>
+        <div className="text-center">
+          <Link to="/">
+            <Button variant="outline">Back to TOP</Button>
+          </Link>
         </div>
       </section>
 

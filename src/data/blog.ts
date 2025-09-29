@@ -1,4 +1,4 @@
-import { mainData } from "./main";
+// import { mainData } from "./main";
 
 export type BlogLayout =
   | "default"

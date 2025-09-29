@@ -1,15 +1,15 @@
 :root {
   /* メインカラーパレット */
-  --color-primary: #FF35FF;
-  --color-primary-light: #FF6BFF;
-  --color-primary-dark: #CC2ACC;
-  --color-primary-soft: #FFB5FF;
+  --color-primary: #ff35ff;
+  --color-primary-light: #ff6bff;
+  --color-primary-dark: #cc2acc;
+  --color-primary-soft: #ffb5ff;
   --color-primary-50: #fef7ff;
   --color-primary-100: #fdeeff;
   --color-primary-200: #fbd9ff;
   --color-primary-300: #f8b5ff;
   --color-primary-400: #f382ff;
-  --color-primary-500: #FF35FF;
+  --color-primary-500: #ff35ff;
   --color-primary-600: #e51de5;
   --color-primary-700: #c814c8;
   --color-primary-800: #a512a5;
@@ -38,7 +38,7 @@ h1 {
 h2 {
   @apply font-mincho text-3xl sm:text-4xl md:text-5xl font-bold text-center !tracking-wider mb-10 sm:mb-16 md:mb-20 after:content-[''] after:block after:w-5 after:sm:w-8 after:md:w-10 after:h-[1px] after:bg-gray-400 after:mx-auto after:mt-4 after:sm:mt-5 after:md:mt-8;
   span {
-    @apply font-sans font-normal text-xs sm:text-sm md:text-lg block mt-4 sm:mt-5 md:mt-8 text-gray-300;
+    @apply font-sans font-normal text-xs sm:text-sm md:text-lg block mt-4 sm:mt-5 md:mt-8;
   }
 }
 

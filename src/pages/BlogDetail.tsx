@@ -8,7 +8,7 @@ import { blogData } from "../data/blog";
 
 export default function BlogDetail() {
   const { slug } = useParams<{ slug: string }>();
-  const { isAuthenticated, isLoading, login, logout } = useBlogAuth();
+  const { isAuthenticated, isLoading, login } = useBlogAuth();
   const [showAuthModal, setShowAuthModal] = useState(false);
 
   // slugに基づいて記事を検索
@@ -26,13 +26,11 @@ export default function BlogDetail() {
   // 認証が必要な場合の処理
   if (isLoading) {
     return (
-      <div className="flex min-h-screen flex-col relative">
-        <main className="flex-1 flex items-center justify-center">
-          <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500 mx-auto mb-4"></div>
-            <p className="text-gray-300">読み込み中...</p>
-          </div>
-        </main>
+      <div className="flex items-center justify-center min-h-screen flex-col relative">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500 mx-auto mb-4"></div>
+          <p className="text-gray-300">読み込み中...</p>
+        </div>
       </div>
     );
   }
@@ -40,24 +38,22 @@ export default function BlogDetail() {
   // 認証されていない場合は認証モーダルを表示
   if (!isAuthenticated) {
     return (
-      <div className="flex min-h-screen flex-col relative">
-        <main className="flex-1 flex items-center justify-center">
-          <div className="text-center">
-            <h2>
-              BLOG
-              <span>ブログ</span>
-            </h2>
-            <p className="mb-10 md:mb-20">
-              このページにアクセスするにはログインが必要です。
-            </p>
-            <button 
-              onClick={() => setShowAuthModal(true)}
-              className="px-6 py-3 bg-primary-500 text-white rounded-lg font-semibold hover:bg-primary-600 transition-colors"
-            >
-              ログイン
-            </button>
-          </div>
-        </main>
+      <div className="flex items-center justify-center min-h-screen flex-col relative">
+        <div className="text-center">
+          <h2>
+            BLOG
+            <span>ブログ</span>
+          </h2>
+          <p className="mb-10 md:mb-20">
+            このページにアクセスするにはログインが必要です。
+          </p>
+          <button
+            onClick={() => setShowAuthModal(true)}
+            className="px-6 py-3 bg-primary-500 rounded-lg font-semibold hover:bg-primary-600 transition-colors"
+          >
+            ログイン
+          </button>
+        </div>
         {showAuthModal && (
           <BasicAuth
             onAuthSuccess={() => {
@@ -83,7 +79,10 @@ export default function BlogDetail() {
     >
       {/* 記事の動的セクションをレンダリング */}
       {article.sections && (
-        <DynamicSections sections={article.sections} articleId={article.id.toString()} />
+        <DynamicSections
+          sections={article.sections}
+          articleId={article.id.toString()}
+        />
       )}
     </BlogArticleLayout>
   );

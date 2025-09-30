@@ -1,23 +1,24 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "../components/Button";
-import Cta from "../components/Cta";
+import { ContactForm } from "../components/ContactForm";
 import BasicAuth from "../components/BasicAuth";
 import { useAuth } from "../hooks/useAuth";
-import { worksData } from "../data/works";
+import { useWorksData } from "../hooks/useWorksData";
 // import { ColorPalette } from "../components/ColorPalette";
 
 export default function Works() {
   const { isAuthenticated, isLoading, login, logout } = useAuth();
+  const { works, isLoading: dataLoading } = useWorksData();
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("すべて");
 
   const allCategories = Array.from(
-    new Set(worksData.flatMap((work) => work.category))
+    new Set(works.flatMap((work) => work.category))
   ).sort();
 
   // 認証が必要な場合の処理
-  if (isLoading) {
+  if (isLoading || dataLoading) {
     return (
       <div className="flex items-center justify-center min-h-screen flex-col relative">
         <div className="text-center">
@@ -40,7 +41,7 @@ export default function Works() {
           <p className="mb-10 md:mb-20">
             このページにアクセスするにはログインが必要です。
           </p>
-          <Button onClick={() => setShowAuthModal(true)}>ログイン</Button>
+          <Button onClick={() => setShowAuthModal(true)}>Login</Button>
         </div>
         {showAuthModal && (
           <BasicAuth
@@ -65,7 +66,7 @@ export default function Works() {
             <span>制作実績</span>
           </h2>
           <Button variant="outline" onClick={logout} className="text-sm">
-            ログアウト
+            Logout
           </Button>
         </div>
 
@@ -75,7 +76,7 @@ export default function Works() {
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
-                className={`px-6 py-2 rounded-full transition-colors ${
+                className={`text-sm px-6 py-2 rounded-full transition-colors ${
                   selectedCategory === category
                     ? "bg-primary-500 hover:bg-primary-600"
                     : "bg-gray-700 text-gray-300 hover:bg-gray-600"
@@ -87,11 +88,11 @@ export default function Works() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20 md:mb-40">
-            {worksData
+            {works
               .filter(
                 (work) =>
                   selectedCategory === "すべて" ||
-                  work.category.includes(selectedCategory)
+                  work.category.includes(selectedCategory as any)
               )
               .map((work) => (
                 <Link
@@ -144,7 +145,7 @@ export default function Works() {
         </div>
       </section>
 
-      <Cta />
+      <ContactForm />
     </div>
   );
 }

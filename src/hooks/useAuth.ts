@@ -40,10 +40,12 @@ export function useAuth() {
     isLoading: true,
   });
 
-  // 認証成功時の処理
+  // 認証成功時の処理（BasicAuthコンポーネントから呼び出される）
   const login = () => {
+    // 認証状態を再チェックしてから設定
+    const isAuth = checkAuth("works_auth");
     setAuthState({
-      isAuthenticated: true,
+      isAuthenticated: isAuth,
       isLoading: false,
     });
   };

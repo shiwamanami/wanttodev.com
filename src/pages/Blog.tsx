@@ -46,7 +46,7 @@ export default function BlogPage() {
           <p className="mb-10 md:mb-20">
             このページにアクセスするにはログインが必要です。
           </p>
-          <Button onClick={() => setShowAuthModal(true)}>ログイン</Button>
+          <Button onClick={() => setShowAuthModal(true)}>Login</Button>
         </div>
         {showAuthModal && (
           <BasicAuth
@@ -70,7 +70,7 @@ export default function BlogPage() {
             <span>ブログ</span>
           </h2>
           <Button variant="outline" onClick={logout} className="text-sm">
-            ログアウト
+            Logout
           </Button>
         </div>
 

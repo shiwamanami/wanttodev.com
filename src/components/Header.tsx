@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
 
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const { isAuthenticated } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -46,6 +48,14 @@ const Header: React.FC = () => {
           >
             About
           </Link>
+          {isAuthenticated && (
+            <Link
+              to="/admin"
+              className="no-underline px-3 md:px-4 py-2 hover:bg-white/20 transition-colors text-primary-400"
+            >
+              Admin
+            </Link>
+          )}
         </div>
       </div>
     </nav>

@@ -11,15 +11,22 @@ import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import "swiper/css/free-mode";
 
-import { worksData } from "../data/works";
-
-const mediaList = [
-  ...worksData[0].mediaData.video.map((src) => ({ type: "video", src })),
-  ...worksData[0].mediaData.image.map((src) => ({ type: "image", src })),
-].flat();
+import { useWorksData } from "../hooks/useWorksData";
+import { useParams } from "react-router-dom";
 
 export default function WorksSwiper() {
+  const { id } = useParams<{ id: string }>();
+  const { getWork } = useWorksData();
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
+
+  const workId = id ? parseInt(id, 10) : 0;
+  const work = getWork(workId);
+
+  if (!work) {
+    return <div>作品が見つかりません</div>;
+  }
+
+  const mediaList = [...work.mediaData.videos, ...work.mediaData.images];
   return (
     <>
       <Swiper
@@ -65,7 +72,7 @@ export default function WorksSwiper() {
         freeMode={true}
         watchSlidesProgress={true}
         modules={[FreeMode, Navigation, Thumbs]}
-        className="mySwiper w-full h-[20%] box-border pt-5"
+        className="mySwiper w-full h-[20%] box-border !pt-5"
       >
         {mediaList.map((item, index) => (
           <SwiperSlide key={index}>

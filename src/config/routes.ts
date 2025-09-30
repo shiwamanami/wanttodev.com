@@ -38,6 +38,11 @@ export const routeConfigs: RouteConfig[] = [
     title: "プライバシーポリシー",
     description: "プライバシーポリシー",
   },
+  {
+    path: "/admin",
+    title: "管理画面",
+    description: "作品データの管理",
+  },
 ];
 
 /**

@@ -3,13 +3,14 @@ import { useParams, Link } from "react-router-dom";
 import { Button } from "../components/Button";
 import Cta from "../components/Cta";
 import WorksSwiper from "../components/WorksSwiper";
-import { worksData } from "../data/works";
+import { useWorksData } from "../hooks/useWorksData";
 import { formatDate } from "../lib/utils";
 
 export default function WorksDetail() {
   const { id } = useParams<{ id: string }>();
+  const { getWork } = useWorksData();
   const workId = id ? parseInt(id, 10) : 0;
-  const work = worksData.find((w) => w.id === workId);
+  const work = getWork(workId);
 
   if (!work) {
     return (
@@ -30,12 +31,11 @@ export default function WorksDetail() {
   return (
     <div className="flex min-h-screen flex-col relative">
       <section className="container max-w-6xl py-10 sm:py-20">
-        {/* パンくずリスト */}
         <nav className="mb-8">
           <ol className="flex items-center space-x-2 text-sm text-gray-400">
             <li>
               <Link to="/" className="hover:text-primary-400 transition-colors">
-                ホーム
+                Top
               </Link>
             </li>
             <li className="text-gray-600">/</li>
@@ -44,7 +44,7 @@ export default function WorksDetail() {
                 to="/works"
                 className="hover:text-primary-400 transition-colors"
               >
-                制作実績
+                Works
               </Link>
             </li>
             <li className="text-gray-600">/</li>
@@ -73,17 +73,57 @@ export default function WorksDetail() {
             <WorksSwiper />
           </div>
 
+          {/* PC image */}
+          <div className="flex flex-row gap-2 md:gap-10">
+            <div>
+              <img
+                src={`/images/works/${work.id}/pc01.webp`}
+                className="object-cover"
+                alt={work.title}
+              />
+            </div>
+            <div>
+              <img
+                src={`/images/works/${work.id}/pc02.webp`}
+                className="object-cover"
+                alt={work.title}
+              />
+            </div>
+            <div>
+              <img
+                src={`/images/works/${work.id}/pc03.webp`}
+                className="object-cover"
+                alt={work.title}
+              />
+            </div>
+          </div>
+
+          {/* mobile image */}
           <div>
             <img
               src={`/images/works/${work.id}/mobile.webp`}
+              className="object-cover"
               alt={work.title}
             />
+          </div>
+
+          {/* wire image */}
+          <div className="flex flex-row gap-2 md:gap-10">
+            {work.mediaData.wireImages.map((wireImg, index) => (
+              <div key={index}>
+                <img
+                  src={wireImg.src}
+                  className="object-cover"
+                  alt={wireImg.alt || `${work.title} - Wireframe ${index + 1}`}
+                />
+              </div>
+            ))}
           </div>
 
           <div className="flex flex-col md:flex-row gap-8 md:gap-20">
             <h3 className="md:w-1/6 text-primary-500 text-nowrap">
               Technology
-              <span className="block text-sm md:text-base text-gray-300">
+              <span className="block text-sm md:text-base text-gray-100">
                 ツール・使用技術
               </span>
             </h3>
@@ -99,7 +139,7 @@ export default function WorksDetail() {
               <div className="flex flex-col md:flex-row gap-8 md:gap-20">
                 <h3 className="md:w-1/6 text-primary-500 text-nowrap">
                   Overview
-                  <span className="block text-sm md:text-base text-gray-300">
+                  <span className="block text-sm md:text-base text-gray-100">
                     プロジェクト概要
                   </span>
                 </h3>
@@ -111,7 +151,7 @@ export default function WorksDetail() {
               <div className="flex flex-col md:flex-row gap-8 md:gap-20">
                 <h3 className="md:w-1/6 text-primary-500 text-nowrap">
                   Challenge
-                  <span className="block text-sm md:text-base text-gray-300">
+                  <span className="block text-sm md:text-base text-gray-100">
                     課題
                   </span>
                 </h3>
@@ -123,7 +163,7 @@ export default function WorksDetail() {
               <div className="flex flex-col md:flex-row gap-8 md:gap-20">
                 <h3 className="md:w-1/6 text-primary-500 text-nowrap">
                   Solution
-                  <span className="block text-sm md:text-base text-gray-300">
+                  <span className="block text-sm md:text-base text-gray-100">
                     解決策
                   </span>
                 </h3>
@@ -135,7 +175,7 @@ export default function WorksDetail() {
               <div className="flex flex-col md:flex-row gap-8 md:gap-20">
                 <h3 className="md:w-1/6 text-primary-500 text-nowrap">
                   Result
-                  <span className="block text-sm md:text-base text-gray-300">
+                  <span className="block text-sm md:text-base text-gray-100">
                     成果
                   </span>
                 </h3>
@@ -147,13 +187,13 @@ export default function WorksDetail() {
               <div className="flex flex-col md:flex-row gap-8 md:gap-20">
                 <h3 className="md:w-1/6 text-primary-500 text-nowrap">
                   Features
-                  <span className="block text-sm md:text-base text-gray-300">
+                  <span className="block text-sm md:text-base text-gray-100">
                     主な機能
                   </span>
                 </h3>
                 <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   {work.details.features.map((feature, index) => (
-                    <li key={index} className="flex items-center text-gray-300">
+                    <li key={index} className="flex items-center text-gray-100">
                       <span className="w-1 h-1 bg-gray-100 rounded-full mr-3 flex-shrink-0"></span>
                       {feature}
                     </li>
@@ -164,7 +204,7 @@ export default function WorksDetail() {
               <div className="flex flex-col md:flex-row gap-8 md:gap-20">
                 <h3 className="md:w-1/6 text-primary-500 text-nowrap">
                   Release
-                  <span className="block text-sm md:text-base text-gray-300">
+                  <span className="block text-sm md:text-base text-gray-100">
                     納品日
                   </span>
                 </h3>

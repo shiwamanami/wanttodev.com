@@ -51,7 +51,7 @@ export default function BlogDetail() {
             onClick={() => setShowAuthModal(true)}
             className="px-6 py-3 bg-primary-500 rounded-lg font-semibold hover:bg-primary-600 transition-colors"
           >
-            ログイン
+            Login
           </button>
         </div>
         {showAuthModal && (

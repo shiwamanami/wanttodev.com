@@ -7,6 +7,7 @@ import Works from "./pages/Works";
 import WorksDetail from "./pages/WorksDetail";
 import BlogPage from "./pages/Blog";
 import BlogDetail from "./pages/BlogDetail";
+import Admin from "./pages/Admin";
 import Footer from "./components/Footer";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import ScrollToTop from "./components/ScrollToTop";
@@ -72,6 +73,7 @@ const App: React.FC = () => {
               <Route path="/works/:id" element={<WorksDetail />} />
               <Route path="/blog" element={<BlogPage />} />
               <Route path="/blog/:slug" element={<BlogDetail />} />
+              <Route path="/admin" element={<Admin />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             </Routes>
           </main>

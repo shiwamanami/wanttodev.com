@@ -29,12 +29,12 @@ export default function Admin() {
     date: "",
     technologies: [],
     category: [],
-    thumbnail: "",
+    // thumbnail: "", // 自動生成されるため削除
     details: {
-      overview: "",
-      challenge: "",
-      solution: "",
-      result: "",
+      overview: [],
+      challenge: [],
+      solution: [],
+      result: [],
       features: [],
       link: "",
     },
@@ -101,27 +101,94 @@ export default function Admin() {
     }));
   };
 
+  // 将来の使用のために保持（現在は未使用）
+  // const handleArrayFieldChange = (field: string, value: string) => {
+  //   const lines = value.split('\n').filter(line => line.trim() !== '');
+  //   setFormData((prev) => ({
+  //     ...prev,
+  //     details: {
+  //       ...prev.details!,
+  //       [field]: lines,
+  //     },
+  //   }));
+  // };
+
+  const handleArrayFieldAdd = (field: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      details: {
+        ...prev.details!,
+        [field]: [
+          ...((prev.details?.[
+            field as keyof typeof prev.details
+          ] as string[]) || []),
+          "",
+        ],
+      },
+    }));
+  };
+
+  const handleArrayFieldRemove = (field: string, index: number) => {
+    setFormData((prev) => {
+      const currentArray =
+        (prev.details?.[field as keyof typeof prev.details] as string[]) || [];
+      const newArray = currentArray.filter((_, i) => i !== index);
+      return {
+        ...prev,
+        details: {
+          ...prev.details!,
+          [field]: newArray,
+        },
+      };
+    });
+  };
+
+  const handleArrayFieldItemChange = (
+    field: string,
+    index: number,
+    value: string
+  ) => {
+    setFormData((prev) => {
+      const currentArray =
+        (prev.details?.[field as keyof typeof prev.details] as string[]) || [];
+      const newArray = [...currentArray];
+      newArray[index] = value;
+      return {
+        ...prev,
+        details: {
+          ...prev.details!,
+          [field]: newArray,
+        },
+      };
+    });
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     // 必須フィールドのチェック
-    if (!formData.title || !formData.date || !formData.details?.overview) {
+    if (
+      !formData.title ||
+      !formData.date ||
+      !formData.details?.overview?.length
+    ) {
       alert("必須フィールドを入力してください");
       return;
     }
 
+    const workId = editingWork?.id || Date.now();
     const newWork: Works = {
-      id: editingWork?.id || Date.now(),
+      id: workId,
       title: formData.title || "",
       date: formData.date || "",
       technologies: formData.technologies || [],
       category: formData.category || [],
-      thumbnail: formData.thumbnail || "",
+      thumbnail: `/images/works/${workId}/thumbnail.webp`, // 自動生成
       details: {
-        overview: formData.details?.overview || "",
-        challenge: formData.details?.challenge || "",
-        solution: formData.details?.solution || "",
-        result: formData.details?.result || "",
+        overview: formData.details?.overview || [],
+        challenge: formData.details?.challenge || [],
+        solution: formData.details?.solution || [],
+        result: formData.details?.result || [],
         features: formData.details?.features || [],
         link: formData.details?.link || "",
       },
@@ -155,10 +222,10 @@ export default function Admin() {
       category: [],
       thumbnail: "",
       details: {
-        overview: "",
-        challenge: "",
-        solution: "",
-        result: "",
+        overview: [],
+        challenge: [],
+        solution: [],
+        result: [],
         features: [],
         link: "",
       },
@@ -193,10 +260,10 @@ export default function Admin() {
       category: [],
       thumbnail: "",
       details: {
-        overview: "",
-        challenge: "",
-        solution: "",
-        result: "",
+        overview: [],
+        challenge: [],
+        solution: [],
+        result: [],
         features: [],
         link: "",
       },
@@ -397,51 +464,156 @@ export default function Admin() {
 
               <div>
                 <label className="block text-sm font-medium mb-2">概要</label>
-                <textarea
-                  value={formData.details?.overview || ""}
-                  onChange={(e) =>
-                    handleDetailsChange("overview", e.target.value)
-                  }
-                  className="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  rows={4}
-                  required
-                />
+                <div className="space-y-2">
+                  {(formData.details?.overview || []).map((item, index) => (
+                    <div key={index} className="flex gap-2">
+                      <textarea
+                        value={item}
+                        onChange={(e) =>
+                          handleArrayFieldItemChange(
+                            "overview",
+                            index,
+                            e.target.value
+                          )
+                        }
+                        className="flex-1 p-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                        rows={2}
+                        placeholder={`概要 ${index + 1}`}
+                      />
+                      <button
+                        type="button"
+                        onClick={() =>
+                          handleArrayFieldRemove("overview", index)
+                        }
+                        className="px-3 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
+                      >
+                        削除
+                      </button>
+                    </div>
+                  ))}
+                  <button
+                    type="button"
+                    onClick={() => handleArrayFieldAdd("overview")}
+                    className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                  >
+                    項目を追加
+                  </button>
+                </div>
               </div>
 
               <div>
                 <label className="block text-sm font-medium mb-2">課題</label>
-                <textarea
-                  value={formData.details?.challenge || ""}
-                  onChange={(e) =>
-                    handleDetailsChange("challenge", e.target.value)
-                  }
-                  className="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  rows={4}
-                />
+                <div className="space-y-2">
+                  {(formData.details?.challenge || []).map((item, index) => (
+                    <div key={index} className="flex gap-2">
+                      <textarea
+                        value={item}
+                        onChange={(e) =>
+                          handleArrayFieldItemChange(
+                            "challenge",
+                            index,
+                            e.target.value
+                          )
+                        }
+                        className="flex-1 p-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                        rows={2}
+                        placeholder={`課題 ${index + 1}`}
+                      />
+                      <button
+                        type="button"
+                        onClick={() =>
+                          handleArrayFieldRemove("challenge", index)
+                        }
+                        className="px-3 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
+                      >
+                        削除
+                      </button>
+                    </div>
+                  ))}
+                  <button
+                    type="button"
+                    onClick={() => handleArrayFieldAdd("challenge")}
+                    className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                  >
+                    項目を追加
+                  </button>
+                </div>
               </div>
 
               <div>
                 <label className="block text-sm font-medium mb-2">解決策</label>
-                <textarea
-                  value={formData.details?.solution || ""}
-                  onChange={(e) =>
-                    handleDetailsChange("solution", e.target.value)
-                  }
-                  className="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  rows={4}
-                />
+                <div className="space-y-2">
+                  {(formData.details?.solution || []).map((item, index) => (
+                    <div key={index} className="flex gap-2">
+                      <textarea
+                        value={item}
+                        onChange={(e) =>
+                          handleArrayFieldItemChange(
+                            "solution",
+                            index,
+                            e.target.value
+                          )
+                        }
+                        className="flex-1 p-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                        rows={2}
+                        placeholder={`解決策 ${index + 1}`}
+                      />
+                      <button
+                        type="button"
+                        onClick={() =>
+                          handleArrayFieldRemove("solution", index)
+                        }
+                        className="px-3 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
+                      >
+                        削除
+                      </button>
+                    </div>
+                  ))}
+                  <button
+                    type="button"
+                    onClick={() => handleArrayFieldAdd("solution")}
+                    className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                  >
+                    項目を追加
+                  </button>
+                </div>
               </div>
 
               <div>
                 <label className="block text-sm font-medium mb-2">成果</label>
-                <textarea
-                  value={formData.details?.result || ""}
-                  onChange={(e) =>
-                    handleDetailsChange("result", e.target.value)
-                  }
-                  className="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  rows={3}
-                />
+                <div className="space-y-2">
+                  {(formData.details?.result || []).map((item, index) => (
+                    <div key={index} className="flex gap-2">
+                      <textarea
+                        value={item}
+                        onChange={(e) =>
+                          handleArrayFieldItemChange(
+                            "result",
+                            index,
+                            e.target.value
+                          )
+                        }
+                        className="flex-1 p-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                        rows={2}
+                        placeholder={`成果 ${index + 1}`}
+                      />
+                      <button
+                        type="button"
+                        onClick={() => handleArrayFieldRemove("result", index)}
+                        className="px-3 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
+                      >
+                        削除
+                      </button>
+                    </div>
+                  ))}
+                  <button
+                    type="button"
+                    onClick={() => handleArrayFieldAdd("result")}
+                    className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                  >
+                    項目を追加
+                  </button>
+                </div>
               </div>
 
               <div>
@@ -471,23 +643,7 @@ export default function Admin() {
                 />
               </div>
 
-              <div>
-                <label className="block text-sm font-medium mb-2">
-                  サムネイル画像
-                </label>
-                <input
-                  type="text"
-                  value={formData.thumbnail || ""}
-                  onChange={(e) =>
-                    handleInputChange("thumbnail", e.target.value)
-                  }
-                  className="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  placeholder="/images/works/1/thumbnail.webp"
-                />
-                <p className="text-xs text-gray-400 mt-1">
-                  サムネイル画像のパスを入力してください
-                </p>
-              </div>
+              {/* サムネイル画像は自動生成されるため、入力フィールドを削除 */}
 
               {/* 画像アップロード */}
               <div className="space-y-6">
@@ -560,31 +716,13 @@ export default function Admin() {
               <div className="flex gap-6">
                 {/* サムネイル画像 */}
                 <div className="flex-shrink-0">
-                  {work.thumbnail ? (
-                    <div className="w-24 h-24 rounded-lg overflow-hidden bg-gray-700">
-                      <img
-                        src={work.thumbnail}
-                        alt={`${work.title} - サムネイル`}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                  ) : (
-                    <div className="w-24 h-24 rounded-lg bg-gray-700 flex items-center justify-center">
-                      <svg
-                        className="w-8 h-8 text-gray-500"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                        />
-                      </svg>
-                    </div>
-                  )}
+                  <div className="w-24 h-24 rounded-lg overflow-hidden bg-gray-700">
+                    <img
+                      src={`/images/works/${work.id}/thumbnail.webp`}
+                      alt={`${work.title} - サムネイル`}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
                 </div>
 
                 {/* 作品情報 */}
@@ -665,7 +803,7 @@ export default function Admin() {
 
         <div className="text-center mt-8">
           <Link to="/works">
-            <Button variant="outline">作品一覧に戻る</Button>
+            <Button variant="outline">Works一覧へ</Button>
           </Link>
         </div>
       </section>

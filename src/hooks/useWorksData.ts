@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Works, validateWorksData, worksData } from "../data/works";
 import {
   readJsonFile,
-  writeJsonFile,
   autoUpdateJsonFile,
   realtimeUpdateJsonFile,
   readFromLocalStorage,

@@ -126,12 +126,6 @@ export default function Works() {
                     <h3 className="text-lg md:text-xl mb-3 group-hover:text-primary-500 transition-colors">
                       {work.title}
                     </h3>
-
-                    {/* <div className="flex gap-2">
-                      <Link to={`/works/${work.id}`} className="flex-1">
-                        <Button className="w-full text-sm">詳細を見る</Button>
-                      </Link>
-                    </div> */}
                   </div>
                 </Link>
               ))}

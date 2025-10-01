@@ -55,12 +55,12 @@ export interface Works {
   date: string; // YYYY.MM 形式
   technologies: Technology[];
   category: WorkCategory[];
-  thumbnail?: string; // サムネイル画像のパス
+  thumbnail?: string; // サムネイル画像のパス（自動生成される）
   details: {
-    overview: string;
-    challenge: string;
-    solution: string;
-    result: string;
+    overview: string[];
+    challenge: string[];
+    solution: string[];
+    result: string[];
     features: string[];
     link: string;
   };
@@ -82,12 +82,12 @@ export function validateWorksData(data: any): data is Works {
     typeof data.date === "string" &&
     Array.isArray(data.technologies) &&
     Array.isArray(data.category) &&
-    (typeof data.thumbnail === "string" || data.thumbnail === undefined) &&
+    // thumbnailは自動生成されるため、バリデーションから除外
     typeof data.details === "object" &&
-    typeof data.details.overview === "string" &&
-    typeof data.details.challenge === "string" &&
-    typeof data.details.solution === "string" &&
-    typeof data.details.result === "string" &&
+    Array.isArray(data.details.overview) &&
+    Array.isArray(data.details.challenge) &&
+    Array.isArray(data.details.solution) &&
+    Array.isArray(data.details.result) &&
     Array.isArray(data.details.features) &&
     typeof data.details.link === "string" &&
     typeof data.mediaData === "object" &&
@@ -96,6 +96,19 @@ export function validateWorksData(data: any): data is Works {
     Array.isArray(data.mediaData.wireImages) &&
     typeof data.isVisible === "boolean"
   );
+}
+
+// サムネイルパスを自動生成する関数
+export function generateThumbnailPath(id: number): string {
+  return `/images/works/${id}/thumbnail.webp`;
+}
+
+// Worksオブジェクトにサムネイルパスを設定する関数
+export function setThumbnailPath(work: Omit<Works, "thumbnail">): Works {
+  return {
+    ...work,
+    thumbnail: generateThumbnailPath(work.id),
+  };
 }
 
 // データ変換関数（旧形式から新形式へ）

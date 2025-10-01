@@ -146,9 +146,6 @@ npm install
 REACT_APP_AUTH_USERNAME=user01
 REACT_APP_AUTH_PASSWORD=Dp7QCkKR
 
-# その他の設定
-# REACT_APP_API_URL=https://api.example.com
-# REACT_APP_DEBUG=true
 ```
 
 **注意**: `.env` ファイルは `.gitignore` に含まれているため、機密情報を安全に管理できます。
@@ -305,10 +302,16 @@ fetch("/src/scripts/migrateData.js")
 
 このプロジェクトは MIT ライセンスの下で公開されています。
 
-## 画像
+## 必要素材
 
 - Works ページ
-  fullpage キャプチャ：　 PC サイズ W:1280px / SP サイズ W:800px
-  pc: h 1280px × w 2800px
-  Thumbnail（16:9）：　 W:1280px × h:720px
-  ※画像 1 枚あたり 150KB 以下が理想。超高解像度でも 500KB 以内に抑える。
+  ① 画像（webp 形式）
+  ・fullpage : PC サイズ：w 1280(2560)px × h auto 　/　 SP サイズ：w 400(800)px × h auto）
+  ・thumbnail : W 1280px × h 800px（8:5）
+  ・pc（３枚） : h 1280px × w 2800px
+  ・mobile（３枚）
+  ・wire : W 1280px × h 720px
+
+  ※画像１枚あたり 150KB 以下が理想（超高解像度でも 500KB 以内に抑える）
+
+  ② 挙動確認用の動画

@@ -58,7 +58,7 @@ export default function WorksDetail() {
               <Link
                 key={index}
                 to={`/works?category=${cat}`}
-                className="text-xs text-primary-500 border-b border-transparent hover:border-primary-500"
+                className="text-xs md:text-sm text-primary-500 border-b border-transparent hover:border-primary-500 mb-3"
               >
                 #{cat}
               </Link>
@@ -69,7 +69,7 @@ export default function WorksDetail() {
             {work.title}
           </h2>
 
-          <div>
+          <div className="!mt-10 md:!mt-20">
             <WorksSwiper />
           </div>
 
@@ -99,12 +99,28 @@ export default function WorksDetail() {
           </div>
 
           {/* mobile image */}
-          <div>
-            <img
-              src={`/images/works/${work.id}/mobile.webp`}
-              className="object-cover"
-              alt={work.title}
-            />
+          <div className="flex flex-row gap-2 md:gap-10">
+            <div>
+              <img
+                src={`/images/works/${work.id}/mobile01.webp`}
+                className="object-cover"
+                alt={work.title}
+              />
+            </div>
+            <div>
+              <img
+                src={`/images/works/${work.id}/mobile02.webp`}
+                className="object-cover"
+                alt={work.title}
+              />
+            </div>
+            <div>
+              <img
+                src={`/images/works/${work.id}/mobile03.webp`}
+                className="object-cover"
+                alt={work.title}
+              />
+            </div>
           </div>
 
           {/* wire image */}
@@ -143,9 +159,11 @@ export default function WorksDetail() {
                     プロジェクト概要
                   </span>
                 </h3>
-                <p className="md:w-5/6 whitespace-pre-line">
-                  {work.details.overview}
-                </p>
+                <div className="md:w-5/6 space-y-2">
+                  {work.details.overview.map((paragraph, index) => (
+                    <p key={index}>{paragraph}</p>
+                  ))}
+                </div>
               </div>
 
               <div className="flex flex-col md:flex-row gap-8 md:gap-20">
@@ -155,9 +173,11 @@ export default function WorksDetail() {
                     課題
                   </span>
                 </h3>
-                <p className="md:w-5/6 whitespace-pre-line">
-                  {work.details.challenge}
-                </p>
+                <div className="md:w-5/6 space-y-2">
+                  {work.details.challenge.map((paragraph, index) => (
+                    <p key={index}>{paragraph}</p>
+                  ))}
+                </div>
               </div>
 
               <div className="flex flex-col md:flex-row gap-8 md:gap-20">
@@ -167,9 +187,11 @@ export default function WorksDetail() {
                     解決策
                   </span>
                 </h3>
-                <p className="md:w-5/6 whitespace-pre-line">
-                  {work.details.solution}
-                </p>
+                <div className="md:w-5/6 space-y-2">
+                  {work.details.solution.map((paragraph, index) => (
+                    <p key={index}>{paragraph}</p>
+                  ))}
+                </div>
               </div>
 
               <div className="flex flex-col md:flex-row gap-8 md:gap-20">
@@ -179,9 +201,11 @@ export default function WorksDetail() {
                     成果
                   </span>
                 </h3>
-                <p className="md:w-5/6 whitespace-pre-line">
-                  {work.details.result}
-                </p>
+                <div className="md:w-5/6 space-y-2">
+                  {work.details.result.map((paragraph, index) => (
+                    <p key={index}>{paragraph}</p>
+                  ))}
+                </div>
               </div>
 
               <div className="flex flex-col md:flex-row gap-8 md:gap-20">

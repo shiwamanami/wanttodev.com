@@ -19,7 +19,7 @@ const Header: React.FC = () => {
   return (
     <nav
       className={`${
-        isScrolled ? "bg-gray-900/60" : "bg-gray-900/30"
+        isScrolled ? "bg-gray-900/70" : "bg-gray-900/30"
       } sticky top-0 z-50 transition-colors duration-300`}
     >
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-end items-center px-4 md:px-0 py-3 md:py-4">

@@ -32,7 +32,7 @@ export default function About() {
                 M
               </span>
             </div>
-            <h3 className="mb-4 md:mb-20">プログラマー / WEBデザイナー</h3>
+            <h3 className="mb-10 md:mb-20">プログラマー / WEBデザイナー</h3>
             <p>
               「見た目の美しさ」と「使いやすさ」を両立させたWeb制作をモットーに、デザインから開発までワンストップで提供。
               <br />

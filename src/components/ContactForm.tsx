@@ -51,10 +51,10 @@ export const ContactForm: React.FC = () => {
               CONTACT
               <span>お問い合わせ</span>
             </h2>
-          <p>ご質問やご相談がございましたら、お気軽にお問い合わせください。</p>
+          <p>ご質問やご相談がございましたら、<br className="xs:hidden"/>お気軽にお問い合わせください。</p>
         </div>
 
-        <div className="bg-transparent border border-white/40 p-8 md:p-16">
+        <div className="bg-transparent border border-white/40 p-8 xs:p-10 md:p-16">
           {submitStatus === "success" && (
             <div className="mb-6 p-4 bg-green-900/50 border border-green-700 rounded-lg text-green-300">
               お問い合わせありがとうございます。内容を確認の上、2営業日以内にご返信いたします。
@@ -75,90 +75,86 @@ export const ContactForm: React.FC = () => {
             onSubmit={handleSubmit}
             action="/contact.html"
           >
-            <div className="space-y-6 md:space-y-10 mb-6 md:mb-20">
-            <input type="hidden" name="form-name" value="contact" />
-            <div style={{ display: "none" }}>
-              <label>
-                Don't fill this out if you're human: <input name="bot-field" />
-              </label>
-            </div>
+            <div className="space-y-6 md:space-y-10 mb-10 md:mb-20 [&_label]:block [&_label]:!text-xs [&_label]:md:text-sm [&_label]:text-start [&_label]:mb-2">
+              <input type="hidden" name="form-name" value="contact" />
+              <div style={{ display: "none" }}>
+                <label>
+                  Don't fill this out if you're human: <input name="bot-field" />
+                </label>
+              </div>
 
-            <div className="grid md:grid-cols-2 gap-4">
+              <div className="grid md:grid-cols-2 gap-4">
+                <div>
+                  <label
+                    htmlFor="name"
+                  >
+                    お名前 <span className="text-red-400">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    className="text-xs md:text-sm w-full px-4 py-2 md:py-3 bg-gray-500/60 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                    placeholder="山田太郎"
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="email"
+                  >
+                    メールアドレス <span className="text-red-400">*</span>
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    className="text-xs md:text-sm w-full px-4 py-2 md:py-3 bg-gray-500/60 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                    placeholder="example@email.com"
+                  />
+                </div>
+              </div>
+
               <div>
                 <label
-                  htmlFor="name"
-                  className="block text-sm text-start mb-2"
+                  htmlFor="company"
                 >
-                  お名前 <span className="text-red-400">*</span>
+                  会社名・団体名
                 </label>
                 <input
                   type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
+                  id="company"
+                  name="company"
+                  value={formData.company}
                   onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 bg-gray-500/60 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  placeholder="山田太郎"
+                  className="text-xs md:text-sm w-full px-4 py-2 md:py-3 bg-gray-500/60 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                  placeholder="株式会社Sample"
                 />
               </div>
 
               <div>
                 <label
-                  htmlFor="email"
-                  className="block text-sm text-start mb-2"
+                  htmlFor="message"
                 >
-                  メールアドレス <span className="text-red-400">*</span>
+                  お問い合わせ内容 <span className="text-red-400">*</span>
                 </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
+                <textarea
+                  id="message"
+                  name="message"
+                  value={formData.message}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-gray-500/60 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  placeholder="example@email.com"
+                  rows={6}
+                  className="text-xs md:text-sm w-full px-4 py-2 md:py-3 bg-gray-500/60 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-vertical"
+                  placeholder="お問い合わせ内容をご記入ください"
                 />
               </div>
-            </div>
-
-            <div>
-              <label
-                htmlFor="company"
-                className="block text-sm text-start mb-2"
-              >
-                会社名・団体名
-              </label>
-              <input
-                type="text"
-                id="company"
-                name="company"
-                value={formData.company}
-                onChange={handleChange}
-                className="w-full px-4 py-3 bg-gray-500/60 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                placeholder="株式会社Sample"
-              />
-            </div>
-
-            <div>
-              <label
-                htmlFor="message"
-                className="block text-sm text-start mb-2"
-              >
-                お問い合わせ内容 <span className="text-red-400">*</span>
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                required
-                rows={6}
-                className="w-full px-4 py-3 bg-gray-500/60 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-vertical"
-                placeholder="お問い合わせ内容をご記入ください"
-              />
-            </div>
             </div>
 
             <div className="text-center">
@@ -172,19 +168,6 @@ export const ContactForm: React.FC = () => {
             </div>
           </form>
 
-          {/* <div className="mt-8 text-center text-sm text-gray-400">
-            <p>
-              お急ぎの場合は、お電話でもお問い合わせいただけます。
-              <br />
-              <a
-                href={`tel:${process.env.REACT_APP_PHONE || "080-3962-8870"}`}
-                className="text-blue-400 hover:text-blue-300 underline"
-              >
-                080-3962-8870
-              </a>
-              （平日・土日祝日 10時〜18時）
-            </p>
-          </div> */}
         </div>
       </div>
     </section>

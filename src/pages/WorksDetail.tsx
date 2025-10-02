@@ -132,6 +132,7 @@ export default function WorksDetail() {
                   className="object-cover"
                   alt={wireImg.alt || `${work.title} - Wireframe ${index + 1}`}
                 />
+                <p>ワイヤーフレーム</p>
               </div>
             ))}
           </div>
@@ -148,7 +149,7 @@ export default function WorksDetail() {
             </div>
           </div>
 
-          <div className="flex flex-col md:flex-row gap-8 md:gap-20">
+          {/* <div className="flex flex-col md:flex-row gap-8 md:gap-20">
             <h3 className="md:w-1/6 text-primary-500 text-nowrap">
               Client
               <span className="block text-sm md:text-base text-gray-100">
@@ -158,7 +159,7 @@ export default function WorksDetail() {
             <div className="md:w-5/6">
               <span className="text-gray-100">{work.client}</span>
             </div>
-          </div>
+          </div> */}
 
           <div className="flex flex-col md:flex-row gap-8 md:gap-20">
             <h3 className="md:w-1/6 text-primary-500 text-nowrap">
@@ -187,7 +188,7 @@ export default function WorksDetail() {
           </div>
 
           {work.details && (
-            <div className="space-y-12 md:space-y-20">
+            <div className="space-y-20 md:space-y-40">
               <div className="flex flex-col md:flex-row gap-8 md:gap-20">
                 <h3 className="md:w-1/6 text-primary-500 text-nowrap">
                   Overview
@@ -196,9 +197,13 @@ export default function WorksDetail() {
                   </span>
                 </h3>
                 <div className="md:w-5/6 space-y-2">
-                  {work.details.overview.map((paragraph, index) => (
-                    <p key={index}>{paragraph}</p>
-                  ))}
+                  {Array.isArray(work.details.overview) ? (
+                    work.details.overview.map((paragraph, index) => (
+                      <p key={index}>{paragraph}</p>
+                    ))
+                  ) : (
+                    <p>{work.details.overview}</p>
+                  )}
                 </div>
               </div>
 
@@ -210,9 +215,13 @@ export default function WorksDetail() {
                   </span>
                 </h3>
                 <div className="md:w-5/6 space-y-2">
-                  {work.details.challenge.map((paragraph, index) => (
-                    <p key={index}>{paragraph}</p>
-                  ))}
+                  {Array.isArray(work.details.challenge) ? (
+                    work.details.challenge.map((paragraph, index) => (
+                      <p key={index}>{paragraph}</p>
+                    ))
+                  ) : (
+                    <p>{work.details.challenge}</p>
+                  )}
                 </div>
               </div>
 
@@ -224,9 +233,13 @@ export default function WorksDetail() {
                   </span>
                 </h3>
                 <div className="md:w-5/6 space-y-2">
-                  {work.details.solution.map((paragraph, index) => (
-                    <p key={index}>{paragraph}</p>
-                  ))}
+                  {Array.isArray(work.details.solution) ? (
+                    work.details.solution.map((paragraph, index) => (
+                      <p key={index}>{paragraph}</p>
+                    ))
+                  ) : (
+                    <p>{work.details.solution}</p>
+                  )}
                 </div>
               </div>
 
@@ -238,9 +251,13 @@ export default function WorksDetail() {
                   </span>
                 </h3>
                 <div className="md:w-5/6 space-y-2">
-                  {work.details.result.map((paragraph, index) => (
-                    <p key={index}>{paragraph}</p>
-                  ))}
+                  {Array.isArray(work.details.result) ? (
+                    work.details.result.map((paragraph, index) => (
+                      <p key={index}>{paragraph}</p>
+                    ))
+                  ) : (
+                    <p>{work.details.result}</p>
+                  )}
                 </div>
               </div>
 
@@ -252,12 +269,22 @@ export default function WorksDetail() {
                   </span>
                 </h3>
                 <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  {work.details.features.map((feature, index) => (
-                    <li key={index} className="flex items-center text-gray-100">
+                  {Array.isArray(work.details.features) ? (
+                    work.details.features.map((feature, index) => (
+                      <li
+                        key={index}
+                        className="flex items-center text-gray-100"
+                      >
+                        <span className="w-1 h-1 bg-gray-100 rounded-full mr-3 flex-shrink-0"></span>
+                        {feature}
+                      </li>
+                    ))
+                  ) : (
+                    <li className="flex items-center text-gray-100">
                       <span className="w-1 h-1 bg-gray-100 rounded-full mr-3 flex-shrink-0"></span>
-                      {feature}
+                      {work.details.features}
                     </li>
-                  ))}
+                  )}
                 </ul>
               </div>
 

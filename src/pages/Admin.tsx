@@ -168,6 +168,7 @@ export default function Admin() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log("📝 フォーム送信開始...", { editingWork, formData });
 
     // 必須フィールドのチェック
     if (
@@ -214,11 +215,14 @@ export default function Admin() {
     }
 
     if (editingWork) {
+      console.log("🔄 既存作品を更新中...", editingWork.id);
       await updateWork(editingWork.id, newWork);
     } else {
+      console.log("➕ 新規作品を追加中...");
       await addWork(newWork);
     }
 
+    console.log("✅ 保存完了");
     setShowForm(false);
     setEditingWork(null);
     setFormData({
@@ -291,99 +295,98 @@ export default function Admin() {
   return (
     <div className="flex min-h-screen flex-col relative">
       <section className="container max-w-6xl py-10 sm:py-20">
-        <div className="flex justify-between items-center mb-8">
-          <h2>
-            ADMIN
-            <span>管理画面</span>
-          </h2>
-          <div className="flex gap-4">
-            <Button onClick={() => setShowForm(true)}>新規追加</Button>
-            <Button
-              variant="outline"
-              onClick={async () => {
-                const { realtimeUpdateJsonFile } = await import(
-                  "../lib/fileUtils"
-                );
-                await realtimeUpdateJsonFile("/works-dynamic.json", works);
-              }}
-            >
-              ファイルをリアルタイム更新
-            </Button>
-            <Button
-              variant="outline"
-              onClick={() => {
-                window.location.reload();
-              }}
-            >
-              データを再読み込み
-            </Button>
-            <Button
-              variant="outline"
-              onClick={() => {
-                localStorage.removeItem("works-data-backup");
-                console.log(
-                  "🗑️ ローカルストレージのバックアップをクリアしました"
-                );
-                window.location.reload();
-              }}
-            >
-              キャッシュをクリア
-            </Button>
-            <Button
-              variant="outline"
-              onClick={async () => {
-                try {
-                  // ファイルからデータを強制読み込み
-                  const response = await fetch("/works-dynamic.json");
-                  if (response.ok) {
-                    const fileData = await response.json();
-                    console.log(
-                      "📁 ファイルから読み込んだデータ:",
-                      fileData.length,
-                      "件"
-                    );
-                    // ローカルストレージをクリアしてファイルデータを設定
-                    localStorage.removeItem("works-data-backup");
-                    localStorage.setItem(
-                      "works-data-backup",
-                      JSON.stringify(fileData)
-                    );
-                    console.log(
-                      "✅ ファイルデータでローカルストレージを更新しました"
-                    );
-                    window.location.reload();
-                  } else {
-                    console.error("❌ ファイルの読み込みに失敗しました");
-                  }
-                } catch (error) {
-                  console.error("❌ エラーが発生しました:", error);
+        <h2>
+          ADMIN
+          <span>管理画面</span>
+        </h2>
+
+        <div className="flex flex-wrap gap-2 mb-10 md:mb-20">
+          <Button onClick={() => setShowForm(true)}>新規追加</Button>
+          <Button
+            variant="outline"
+            onClick={async () => {
+              const { realtimeUpdateJsonFile } = await import(
+                "../lib/fileUtils"
+              );
+              await realtimeUpdateJsonFile("/works-dynamic.json", works);
+            }}
+          >
+            ファイルをリアルタイム更新
+          </Button>
+          <Button
+            variant="outline"
+            onClick={() => {
+              window.location.reload();
+            }}
+          >
+            データを再読み込み
+          </Button>
+          <Button
+            variant="outline"
+            onClick={() => {
+              localStorage.removeItem("works-data-backup");
+              console.log(
+                "🗑️ ローカルストレージのバックアップをクリアしました"
+              );
+              window.location.reload();
+            }}
+          >
+            キャッシュをクリア
+          </Button>
+          <Button
+            variant="outline"
+            onClick={async () => {
+              try {
+                // ファイルからデータを強制読み込み
+                const response = await fetch("/works-dynamic.json");
+                if (response.ok) {
+                  const fileData = await response.json();
+                  console.log(
+                    "📁 ファイルから読み込んだデータ:",
+                    fileData.length,
+                    "件"
+                  );
+                  // ローカルストレージをクリアしてファイルデータを設定
+                  localStorage.removeItem("works-data-backup");
+                  localStorage.setItem(
+                    "works-data-backup",
+                    JSON.stringify(fileData)
+                  );
+                  console.log(
+                    "✅ ファイルデータでローカルストレージを更新しました"
+                  );
+                  window.location.reload();
+                } else {
+                  console.error("❌ ファイルの読み込みに失敗しました");
                 }
-              }}
-            >
-              ファイルから同期
-            </Button>
-            <Button
-              variant="outline"
-              onClick={() => {
-                // 手動でデータ同期を実行するための指示を表示
-                console.log("=== データ同期の手順 ===");
-                console.log("1. ターミナルで以下のコマンドを実行してください:");
-                console.log("   npm run sync-works");
-                console.log("2. または、以下のコマンドでファイル監視を開始:");
-                console.log("   npm run watch-works");
-                console.log("3. その後、このページをリロードしてください");
-                console.log("========================");
-                alert(
-                  "コンソールを確認して、データ同期の手順を確認してください。"
-                );
-              }}
-            >
-              データ同期
-            </Button>
-            <Button variant="outline" onClick={logout}>
-              Logout
-            </Button>
-          </div>
+              } catch (error) {
+                console.error("❌ エラーが発生しました:", error);
+              }
+            }}
+          >
+            ファイルから同期
+          </Button>
+          <Button
+            variant="outline"
+            onClick={() => {
+              // 手動でデータ同期を実行するための指示を表示
+              console.log("=== データ同期の手順 ===");
+              console.log("1. ターミナルで以下のコマンドを実行してください:");
+              console.log("   npm run sync-works");
+              console.log("2. または、以下のコマンドでファイル監視を開始:");
+              console.log("   npm run watch-works");
+              console.log("3. その後、このページをリロードしてください");
+              console.log("========================");
+              alert(
+                "コンソールを確認して、データ同期の手順を確認してください。"
+              );
+            }}
+          >
+            データ同期
+          </Button>
+          <Button variant="outline" onClick={logout}>
+            Logout
+          </Button>
         </div>
 
         {showForm && (
@@ -772,7 +775,7 @@ export default function Admin() {
               <div className="flex gap-6">
                 {/* サムネイル画像 */}
                 <div className="flex-shrink-0">
-                  <div className="w-24 h-24 rounded-lg overflow-hidden bg-gray-700">
+                  <div className="w-32 aspect-[8/5] overflow-hidden bg-gray-700">
                     <img
                       src={`/images/works/${work.id}/thumbnail.webp`}
                       alt={`${work.title} - サムネイル`}
@@ -859,7 +862,7 @@ export default function Admin() {
 
         <div className="text-center mt-8">
           <Link to="/works">
-            <Button variant="outline">Works一覧へ</Button>
+            <Button variant="outline">Back to Works</Button>
           </Link>
         </div>
       </section>

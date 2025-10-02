@@ -13,6 +13,26 @@ export default function Works() {
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("すべて");
 
+  // デバッグ用のログ
+  console.log("🔍 Works コンポーネント - データ状態:", {
+    works: works.length,
+    dataLoading,
+    isAuthenticated,
+    isLoading,
+  });
+
+  // データの詳細をログ出力
+  if (works.length > 0) {
+    console.log(
+      "📊 読み込まれた作品データ:",
+      works.map((work) => ({
+        id: work.id,
+        title: work.title,
+        category: work.category,
+      }))
+    );
+  }
+
   const allCategories = Array.from(
     new Set(works.flatMap((work) => work.category))
   ).sort();
@@ -71,12 +91,12 @@ export default function Works() {
         </div>
 
         <div>
-          <div className="flex flex-wrap gap-4 mb-12 md:mb-20">
+          <div className="flex flex-wrap gap-2 md:gap-4 mb-16 md:mb-20">
             {["すべて", ...allCategories].map((category) => (
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
-                className={`text-sm px-6 py-2 rounded-full transition-colors ${
+                className={`text-xs md:text-sm px-3 md:px-6 py-1 md:py-2 rounded-full transition-colors ${
                   selectedCategory === category
                     ? "bg-primary-500 hover:bg-primary-600"
                     : "bg-gray-700 text-gray-300 hover:bg-gray-600"
@@ -87,49 +107,62 @@ export default function Works() {
             ))}
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20 md:mb-40">
-            {works
-              .filter(
-                (work) =>
-                  selectedCategory === "すべて" ||
-                  work.category.includes(selectedCategory as any)
-              )
-              .map((work) => (
-                <Link
-                  key={work.id}
-                  to={`/works/${work.id}`}
-                  className="backdrop-blur-sm overflow-hidden transition-all duration-300 group block"
-                >
-                  <div className="mb-4">
-                    <img
-                      src={`/images/works/${work.id}/thumbnail.webp`}
-                      alt={work.title}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-
-                  <div>
-                    <div className="mb-3">
-                      <div className="flex flex-wrap gap-2">
-                        {work.category.map((cat, index) => (
-                          <Link
-                            key={index}
-                            to={`/works?category=${cat}`}
-                            className="text-xs text-primary-500 border-b border-transparent hover:border-primary-500"
-                          >
-                            #{cat}
-                          </Link>
-                        ))}
-                      </div>
+          {works.length === 0 ? (
+            <div className="text-center py-20">
+              <p className="text-gray-400 mb-4">データが読み込まれていません</p>
+              <p className="text-sm text-gray-500">
+                コンソールでエラーログを確認してください
+              </p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-8 mb-28 md:mb-40">
+              {works
+                .filter(
+                  (work) =>
+                    selectedCategory === "すべて" ||
+                    work.category.includes(selectedCategory as any)
+                )
+                .map((work) => (
+                  <Link
+                    key={work.id}
+                    to={`/works/${work.id}`}
+                    className="backdrop-blur-sm overflow-hidden transition-all duration-300 group block"
+                  >
+                    <div className="mb-4 aspect-[8/5] overflow-hidden rounded-lg">
+                      <img
+                        src={`/images/works/${work.id}/thumbnail.webp`}
+                        alt={work.title}
+                        className="w-full h-full object-cover"
+                      />
                     </div>
 
-                    <h3 className="text-lg md:text-xl mb-3 group-hover:text-primary-500 transition-colors">
-                      {work.title}
-                    </h3>
-                  </div>
-                </Link>
-              ))}
-          </div>
+                    <div>
+                      <div className="mb-3">
+                        <div className="flex flex-wrap gap-2">
+                          {work.category.map((cat, index) => (
+                            <span
+                              key={index}
+                              className="text-xs text-primary-500 border-b border-transparent hover:border-primary-500 cursor-pointer"
+                              onClick={(e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                setSelectedCategory(cat);
+                              }}
+                            >
+                              #{cat}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      <h3 className="text-lg md:text-xl group-hover:text-primary-500 transition-colors">
+                        {work.title}
+                      </h3>
+                    </div>
+                  </Link>
+                ))}
+            </div>
+          )}
 
           <div className="text-center">
             <Link to="/">

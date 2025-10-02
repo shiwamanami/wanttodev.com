@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { Button } from "../components/Button";
-import Cta from "../components/Cta";
 import SkillItem from "../components/SkillItem";
 import {
   frontendSkills,
@@ -11,6 +10,7 @@ import {
   ecSkills,
   marketingSkills,
 } from "../data/skills";
+import { ContactForm } from "../components/ContactForm";
 
 export default function About() {
   // 令和年 = 西暦年 - 2018
@@ -19,25 +19,29 @@ export default function About() {
 
   return (
     <div className="flex min-h-screen flex-col relative">
-      <section className="container max-w-6xl py-10 sm:py-20">
+      <section className="container max-w-4xl py-10 sm:py-20">
         <h2>
           ABOUT
           <span>私について</span>
         </h2>
 
         <div className="mb-40 md:mb-60">
-          <div className="text-center mb-20 md:mb-40">
-            <div className="w-20 md:w-28 h-20 md:h-28 mx-auto mb-6 bg-gradient-to-br from-primary-400 to-primary-600 rounded-full flex items-center justify-center">
-              <span className="text-4xl md:text-5xl font-bold text-gray-800">
-                M
-              </span>
+          <div className="flex flex-col md:flex-row gap-8 md:gap-20 mb-20 md:mb-40">
+            <div className="md:w-1/6">
+              <div className="w-20 md:w-24 h-20 md:h-24 mx-auto mb-6 bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center">
+                <span className="text-4xl md:text-5xl font-bold text-gray-800">
+                  M
+                </span>
+              </div>
             </div>
-            <h3 className="mb-10 md:mb-20">プログラマー / WEBデザイナー</h3>
-            <p>
-              「見た目の美しさ」と「使いやすさ」を両立させたWeb制作をモットーに、デザインから開発までワンストップで提供。
-              <br />
-              ビジネス課題を理解し、成果につながるクリエイティブをご提案いたします。
-            </p>
+            <div className="md:w-5/6">
+              <h3 className="mb-5 md:mb-8">プログラマー / WEBデザイナー</h3>
+              <p>
+                「見た目の美しさ」と「使いやすさ」を両立させたWeb制作をモットーに、デザインから開発までワンストップでご提供。
+                <br />
+                ビジネス課題を理解し、成果につながるクリエイティブをご提案いたします。
+              </p>
+            </div>
           </div>
 
           <div className="space-y-20 md:space-y-40">
@@ -48,15 +52,15 @@ export default function About() {
                   経歴
                 </span>
               </h3>
-              <div className="md:w-5/6 space-y-10 md:space-y-20">
+              <div className="md:w-5/6 space-y-10 md:space-y-16">
                 <div>
-                  <h4 className="font-bold mb-3 md:mb-5">
+                  <h4 className="mb-3 md:mb-5">
                     2023年(令和5年) – {new Date().getFullYear()}年(令和
                     {reiwaYear}年) 現在
                   </h4>
 
-                  <p className="md:ml-4">
-                    WEB制作会社にて<strong>プログラマ兼Webデザイナー</strong>
+                  <p>
+                    WEB制作会社にて<strong>プログラマー兼Webデザイナー</strong>
                     として、
                     <br />
                     コーポレートサイト、ECサイト、LPなど多様なWeb制作案件を多数担当。
@@ -73,11 +77,11 @@ export default function About() {
                 </div>
 
                 <div>
-                  <h4 className="font-bold mb-3 md:mb-5">2022年(令和4年)</h4>
-                  <p className="md:ml-4">
+                  <h4 className="mb-3 md:mb-5">2022年(令和4年)</h4>
+                  <p>
                     ゼロから独学でプログラミングを習得。
                     <br />
-                    エンジニアリングの基盤を築いた後、ユーザー体験向上のためデザイン領域も独学で習得
+                    エンジニアリングの基盤を築いた後、ユーザー体験向上のためデザイン領域も独学で習得。
                     <br />
                     継続的な学習意欲と自己成長力で、技術とデザインの両軸で価値創造できるエンジニアとしての道を切り開く。
                   </p>
@@ -92,10 +96,14 @@ export default function About() {
                   スキル
                 </span>
               </h3>
-              <div className="md:w-5/6 space-y-14 md:space-y-20">
+              <div className="md:w-5/6 space-y-14 md:space-y-28">
                 <div>
-                  <h4 className="mb-4">フロントエンド</h4>
-                  <div className="flex flex-wrap gap-4 md:gap-8">
+                  <h4 className="mb-4 md:mb-6">
+                    <span className="border-b border-primary-500/50 pb-0.5">
+                      フロントエンド
+                    </span>
+                  </h4>
+                  <div className="flex flex-wrap gap-6 md:gap-8">
                     {frontendSkills.map((skill, index) => (
                       <SkillItem
                         key={index}
@@ -108,8 +116,12 @@ export default function About() {
                   </div>
                 </div>
                 <div>
-                  <h4 className="mb-4">バックエンド</h4>
-                  <div className="flex flex-wrap gap-4 md:gap-8">
+                  <h4 className="mb-4 md:mb-6">
+                    <span className="border-b border-primary-500/50 pb-0.5">
+                      バックエンド
+                    </span>
+                  </h4>
+                  <div className="flex flex-wrap gap-6 md:gap-8">
                     {backendSkills.map((skill, index) => (
                       <SkillItem
                         key={index}
@@ -122,23 +134,13 @@ export default function About() {
                   </div>
                 </div>
                 <div>
-                  <h4 className="mb-4">デザイン</h4>
-                  <div className="flex flex-wrap gap-4 md:gap-8">
+                  <h4 className="mb-4 md:mb-6">
+                    <span className="border-b border-primary-500/50 pb-0.5">
+                      デザイン
+                    </span>
+                  </h4>
+                  <div className="flex flex-wrap gap-6 md:gap-8">
                     {designSkills.map((skill, index) => (
-                      <SkillItem
-                        key={index}
-                        name={skill.name}
-                        image={skill.image}
-                        alt={skill.alt}
-                        isSquare={skill.isSquare}
-                      />
-                    ))}
-                  </div>
-                </div>
-                <div>
-                  <h4 className="mb-4">その他</h4>
-                  <div className="flex flex-wrap gap-4 md:gap-8">
-                    {otherSkills.map((skill, index) => (
                       <SkillItem
                         key={index}
                         name={skill.name}
@@ -151,8 +153,12 @@ export default function About() {
                 </div>
 
                 <div>
-                  <h4 className="mb-4">CMS</h4>
-                  <div className="flex flex-wrap gap-4 md:gap-8">
+                  <h4 className="mb-4 md:mb-6">
+                    <span className="border-b border-primary-500/50 pb-0.5">
+                      CMS
+                    </span>
+                  </h4>
+                  <div className="flex flex-wrap gap-6 md:gap-8">
                     {cmsSkills.map((skill, index) => (
                       <SkillItem
                         key={index}
@@ -166,8 +172,31 @@ export default function About() {
                 </div>
 
                 <div>
-                  <h4 className="mb-4">ECプラットフォーム 構築・運用</h4>
-                  <div className="flex flex-wrap gap-4 md:gap-8">
+                  <h4 className="mb-4 md:mb-6">
+                    <span className="border-b border-primary-500/50 pb-0.5">
+                      その他
+                    </span>
+                  </h4>
+                  <div className="flex flex-wrap gap-6 md:gap-8">
+                    {otherSkills.map((skill, index) => (
+                      <SkillItem
+                        key={index}
+                        name={skill.name}
+                        image={skill.image}
+                        alt={skill.alt}
+                        isSquare={skill.isSquare}
+                      />
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <h4 className="mb-4 md:mb-6">
+                    <span className="border-b border-primary-500/50 pb-0.5">
+                      ECプラットフォーム
+                    </span>
+                  </h4>
+                  <div className="flex flex-wrap gap-6 md:gap-8">
                     {ecSkills.map((skill, index) => (
                       <SkillItem
                         key={index}
@@ -181,8 +210,12 @@ export default function About() {
                 </div>
 
                 <div>
-                  <h4 className="mb-4">マーケティング・広告運用</h4>
-                  <div className="flex flex-wrap gap-4 md:gap-8">
+                  <h4 className="mb-4 md:mb-6">
+                    <span className="border-b border-primary-500/50 pb-0.5">
+                      マーケティング・広告運用
+                    </span>
+                  </h4>
+                  <div className="flex flex-wrap gap-6 md:gap-8">
                     {marketingSkills.map((skill, index) => (
                       <SkillItem
                         key={index}
@@ -215,14 +248,14 @@ export default function About() {
           </div>
         </div>
 
-        <div className="text-center">
+        <div className="text-center mb-20 md:mb-40">
           <Link to="/">
             <Button variant="outline">Back to TOP</Button>
           </Link>
         </div>
       </section>
 
-      <Cta />
+      <ContactForm />
     </div>
   );
 }

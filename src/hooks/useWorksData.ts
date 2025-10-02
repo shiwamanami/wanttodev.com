@@ -19,30 +19,74 @@ export function useWorksData() {
   useEffect(() => {
     const loadData = async () => {
       try {
+        console.log("🔄 データ読み込み開始...");
         // まず動的データファイルを読み込む
         const fileResult = await readJsonFile(DYNAMIC_DATA_PATH);
+        console.log("📁 ファイル読み込み結果:", fileResult);
 
         if (fileResult.success && Array.isArray(fileResult.data)) {
-          // ファイルから読み込んだデータをバリデーション
-          const validData = fileResult.data.filter(validateWorksData);
+          console.log(
+            "✅ ファイル読み込み成功、データ件数:",
+            fileResult.data.length
+          );
+          console.log("📋 読み込まれたデータの最初の項目:", fileResult.data[0]);
+          // ファイルから読み込んだデータを正規化してからバリデーション
+          const normalizedData = fileResult.data.map((data: any) => ({
+            ...data,
+            mediaData: {
+              images: data.mediaData?.images || [],
+              videos: data.mediaData?.videos || [],
+              wireImages: data.mediaData?.wireImages || [],
+            },
+          }));
+          const validData = normalizedData.filter(validateWorksData);
+          console.log("🔍 バリデーション後データ件数:", validData.length);
           if (validData.length > 0) {
             console.log(
               "📁 ファイルからデータを読み込みました:",
               validData.length,
               "件"
             );
+            console.log(
+              "📊 バリデーション済みデータの最初の項目:",
+              validData[0]
+            );
             setWorks(validData);
             setIsLoading(false);
             return;
+          } else {
+            const invalidData = fileResult.data.filter(
+              (data) => !validateWorksData(data)
+            );
+            console.log(
+              "❌ バリデーションに失敗したデータ件数:",
+              invalidData.length
+            );
+            console.log("❌ バリデーションに失敗したデータ:", invalidData);
+            // バリデーションに失敗した理由を詳しく調べる
+            invalidData.forEach((data, index) => {
+              console.log(`❌ データ${index + 1}のバリデーション詳細:`, {
+                id: data.id,
+                title: data.title,
+                hasDetails: !!data.details,
+                hasOverview: !!data.details?.overview,
+                overviewIsArray: Array.isArray(data.details?.overview),
+                hasMediaData: !!data.mediaData,
+                hasImages: !!data.mediaData?.images,
+                imagesIsArray: Array.isArray(data.mediaData?.images),
+              });
+            });
           }
         }
 
         console.log(
           "⚠️ ファイルが空または無効です。バックアップデータをチェックします..."
         );
+        console.log("ファイル読み込み結果の詳細:", fileResult);
 
         // ファイルが空または無効な場合は、バックアップデータをチェック
         const backupData = readFromLocalStorage(STORAGE_KEY);
+        console.log("バックアップデータ:", backupData.length, "件");
         if (backupData.length > 0) {
           console.log(
             "💾 バックアップデータから復元します:",
@@ -50,18 +94,25 @@ export function useWorksData() {
             "件"
           );
           const validData = backupData.filter(validateWorksData);
+          console.log(
+            "バックアップデータのバリデーション後:",
+            validData.length,
+            "件"
+          );
           setWorks(validData);
           // バックアップデータをファイルに復元
           await autoUpdateJsonFile(DYNAMIC_DATA_PATH, validData);
         } else {
-          console.log("📋 初期データを使用します");
-          // どちらもない場合は初期データを使用
-          setWorks(worksData);
+          console.log("📋 データがありません");
+          console.log("初期データ件数:", worksData.length, "件");
+          // データがない場合は空の配列を設定
+          setWorks([]);
         }
       } catch (error) {
         console.error("❌ データの読み込みに失敗しました:", error);
-        // エラーの場合は初期データを使用
-        setWorks(worksData);
+        console.log("データがありません");
+        // エラーの場合は空の配列を設定
+        setWorks([]);
       } finally {
         setIsLoading(false);
       }
@@ -73,14 +124,18 @@ export function useWorksData() {
   // データを保存
   const saveWorks = async (newWorks: Works[]) => {
     try {
+      console.log("💾 データを保存中...", newWorks.length, "件");
       // UIを即座に更新
       setWorks(newWorks);
+      console.log("✅ UIを更新しました");
 
       // リアルタイムファイル更新機能を使用
+      console.log("📁 ファイルを更新中...");
       const fileResult = await realtimeUpdateJsonFile(
         DYNAMIC_DATA_PATH,
         newWorks
       );
+      console.log("📁 ファイル更新結果:", fileResult);
       if (fileResult.success) {
         console.log("✅ データが更新されました");
         console.log("📁 src/data/works-dynamic.json が自動更新されました");
@@ -106,11 +161,13 @@ export function useWorksData() {
 
   // 作品を更新
   const updateWork = async (id: number, updatedWork: Works) => {
+    console.log("🔄 作品を更新中...", { id, updatedWork });
     const newWorks = works.map((work) =>
       work.id === id
         ? { ...updatedWork, id, updatedAt: new Date().toISOString() }
         : work
     );
+    console.log("📊 更新後の作品一覧:", newWorks.length, "件");
     await saveWorks(newWorks);
   };
 

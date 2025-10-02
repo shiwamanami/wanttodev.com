@@ -27,7 +27,7 @@ body {
 }
 
 main {
-  @apply bg-gray-900/30;
+  @apply bg-gray-900/50;
 }
 
 h1 {

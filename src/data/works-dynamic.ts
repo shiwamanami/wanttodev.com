@@ -1,6 +1,5 @@
 import { Works } from "./works";
 
-// 動的データ（管理画面で追加・編集可能）
 export const worksDynamicData: Works[] = [
   {
     id: 1,
@@ -439,6 +438,51 @@ export const worksDynamicData: Works[] = [
       ],
       features: ["レスポンシブデザイン対応", "SEO最適化"],
       link: "https://shahho.net/",
+    },
+    mediaData: {
+      images: [],
+      videos: [],
+    },
+    isVisible: true,
+    createdAt: "2025-09-30T16:41:32.871Z",
+    updatedAt: "2025-09-30T17:01:52.625Z",
+  },
+  {
+    id: 10,
+    title: "椅子専門 ECサイト",
+    date: "2025.5",
+    role: "ブランディング",
+    client: "株式会社Solicere",
+    industry: "家具・インテリア",
+    technologies: ["Shopify", "JavaScript", "HTML", "CSS", "Adobe XD"],
+    category: ["ECサイト"],
+    details: {
+      overview: [
+        "椅子を専門に取り扱うオンラインショップのECサイトを、Shopifyを用いて制作いたしました。",
+        "多様な商品ラインナップを整理し、ユーザーが快適に商品を探せる導線設計を行うとともに、ブランドの世界観を表現したデザインを実装しました。",
+      ],
+      challenge: [
+        "従来はEC機能が整っておらず、商品数が多いにも関わらず検索性や購入導線が不十分でした。",
+        "また、ブランドの専門性が十分に伝わらず、訪問者の離脱率が高いという課題がありました。",
+      ],
+      solution: [
+        "Shopifyを導入し、商品登録・在庫管理・注文処理を効率化",
+        "商品カテゴリや検索機能を整備し、ユーザーが目的の商品に素早くアクセスできる設計を実装",
+        "商品詳細ページではサイズ・素材・利用シーンなどを整理し、比較しやすい情報設計を採用",
+        "シンプルかつ専門性を感じられるデザインを反映し、ブランド価値を高めるビジュアルを構築",
+      ],
+      result: [
+        "公開後は購入率（CVR）が改善し、特にカテゴリ別検索やおすすめ商品の導線が功を奏して、サイト回遊率が向上しました。",
+        "Shopifyの運用性によりクライアント自身での商品更新もスムーズになり、販売促進や新商品の展開スピード向上に貢献しました。",
+      ],
+      features: [
+        "商品カテゴリフィルタ",
+        "レビュー機能",
+        "レコメンド機能",
+        "レスポンシブデザイン対応",
+        "SEO最適化",
+      ],
+      link: "https://solicere.com/",
     },
     mediaData: {
       images: [],

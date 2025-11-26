@@ -25,7 +25,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "update-videos": "node scripts/check-video-files.js"
+    "update-videos": "node scripts/check-video-files.js",
+    "optimize-images": "node scripts/optimize-images.js",
+    "analyze-bundle": "npx webpack-bundle-analyzer build/static/js/*.js"
   },
   "eslintConfig": {
     "extends": [

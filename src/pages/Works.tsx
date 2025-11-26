@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "../components/Button";
 import { ContactForm } from "../components/ContactForm";
+import { LazyImage } from "../components/LazyImage";
 import BasicAuth from "../components/BasicAuth";
 import { useAuth } from "../hooks/useAuth";
 import { useWorksData } from "../hooks/useWorksData";
@@ -129,10 +130,10 @@ export default function Works() {
                     className="backdrop-blur-sm overflow-hidden transition-all duration-300 group block"
                   >
                     <div className="mb-4 aspect-[8/5] overflow-hidden">
-                      <img
+                      <LazyImage
                         src={`/images/works/${work.id}/thumbnail.webp`}
                         alt={work.title}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full"
                       />
                     </div>
 

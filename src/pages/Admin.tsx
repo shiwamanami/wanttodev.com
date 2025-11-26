@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "../components/Button";
 import BasicAuth from "../components/BasicAuth";
@@ -24,6 +24,7 @@ export default function Admin() {
   const [editingWork, setEditingWork] = useState<Works | null>(null);
   const [showForm, setShowForm] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
+  const formRef = useRef<HTMLDivElement>(null);
   const [formData, setFormData] = useState<Partial<Works>>({
     title: "",
     date: "",
@@ -46,6 +47,15 @@ export default function Admin() {
     },
     isVisible: true,
   });
+
+  // フォームが表示されたときに自動スクロール
+  useEffect(() => {
+    if (showForm && formRef.current) {
+      setTimeout(() => {
+        formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100);
+    }
+  }, [showForm]);
 
   // 認証が必要な場合の処理
   if (isLoading || dataLoading) {
@@ -248,6 +258,7 @@ export default function Admin() {
   };
 
   const handleEdit = (work: Works) => {
+    console.log("📝 編集ボタンがクリックされました:", work);
     setEditingWork(work);
     setFormData(work);
     setShowForm(true);
@@ -296,7 +307,36 @@ export default function Admin() {
         </h2>
 
         <div className="flex flex-wrap gap-2 mb-10 md:mb-20">
-          <Button onClick={() => setShowForm(true)}>新規追加</Button>
+          <Button
+            onClick={() => {
+              setEditingWork(null);
+              setFormData({
+                title: "",
+                date: "",
+                role: "",
+                client: "",
+                industry: "",
+                technologies: [],
+                category: [],
+                details: {
+                  overview: [],
+                  challenge: [],
+                  solution: [],
+                  result: [],
+                  features: [],
+                  link: "",
+                },
+                mediaData: {
+                  images: [],
+                  videos: [],
+                },
+                isVisible: true,
+              });
+              setShowForm(true);
+            }}
+          >
+            新規追加
+          </Button>
           <Button
             variant="outline"
             onClick={async () => {
@@ -382,7 +422,7 @@ export default function Admin() {
         </div>
 
         {showForm && (
-          <div className="bg-gray-800 p-6 rounded-lg mb-8">
+          <div ref={formRef} className="bg-gray-800 p-6 rounded-lg mb-8">
             <h3 className="text-xl font-bold mb-6">
               {editingWork ? "作品を編集" : "新規作品を追加"}
             </h3>

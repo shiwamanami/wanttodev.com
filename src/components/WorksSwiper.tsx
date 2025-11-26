@@ -49,7 +49,11 @@ export default function WorksSwiper() {
         {mediaList.map((item, index) => (
           <SwiperSlide key={index}>
             {item.type === "image" ? (
-              <img src={item.src} alt={`Slide ${index + 1}`} />
+              <img 
+                src={item.src} 
+                alt={`Slide ${index + 1}`}
+                className="w-full h-full object-contain"
+              />
             ) : (
               <div className="relative w-full pb-[56.25%]">
                 <video
@@ -57,7 +61,7 @@ export default function WorksSwiper() {
                   loop
                   muted
                   playsInline
-                  className="absolute inset-0 w-full h-full object-cover"
+                  className="absolute inset-0 w-full h-full object-contain"
                 >
                   <source src={item.src} type="video/mp4" />
                 </video>
@@ -80,7 +84,11 @@ export default function WorksSwiper() {
         {mediaList.map((item, index) => (
           <SwiperSlide key={index}>
             {item.type === "image" ? (
-              <img src={item.src} alt={`Slide ${index + 1}`} />
+              <img 
+                src={item.src} 
+                alt={`Slide ${index + 1}`}
+                className="w-full h-full object-contain"
+              />
             ) : (
               <div className="relative w-full pb-[56.25%]">
                 <video
@@ -88,7 +96,7 @@ export default function WorksSwiper() {
                   loop
                   muted
                   playsInline
-                  className="absolute inset-0 w-full h-full object-cover"
+                  className="absolute inset-0 w-full h-full object-contain"
                 >
                   <source src={item.src} type="video/mp4" />
                 </video>

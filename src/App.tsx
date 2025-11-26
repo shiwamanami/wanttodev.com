@@ -12,6 +12,7 @@ import Lab from "./pages/Lab";
 import Footer from "./components/Footer";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import ScrollToTop from "./components/ScrollToTop";
+import { usePerformanceMonitor } from "./hooks/usePerformanceMonitor";
 
 // Vanta.jsの型定義
 declare global {
@@ -24,6 +25,9 @@ declare global {
 
 const App: React.FC = () => {
   const vantaRef = useRef<HTMLDivElement>(null);
+  
+  // パフォーマンス監視を有効化
+  usePerformanceMonitor();
 
   // Vanta.jsのHaloエフェクトを初期化
   useEffect(() => {

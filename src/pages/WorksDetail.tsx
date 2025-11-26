@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { Button } from "../components/Button";
 import Cta from "../components/Cta";
 import WorksSwiper from "../components/WorksSwiper";
+import { LazyImage } from "../components/LazyImage";
 import { useWorksData } from "../hooks/useWorksData";
 import { formatDate } from "../lib/utils";
 import { Technology, WorkCategory } from "../data/works";
@@ -73,7 +74,7 @@ const generateMobileImages = (workId: number, workTitle: string) => {
   return mobileImages;
 };
 
-// 画像の存在を確認する関数
+// 画像の存在を確認する関数（最適化版）
 const checkImageExists = (src: string): Promise<boolean> => {
   return new Promise((resolve) => {
     const img = new Image();
@@ -81,6 +82,17 @@ const checkImageExists = (src: string): Promise<boolean> => {
     img.onerror = () => resolve(false);
     img.src = src;
   });
+};
+
+// 画像の存在を並列で確認する関数
+const checkImagesExist = async (imagePaths: string[]): Promise<string[]> => {
+  const promises = imagePaths.map(async (path) => {
+    const exists = await checkImageExists(path);
+    return exists ? path : null;
+  });
+  
+  const results = await Promise.all(promises);
+  return results.filter((path): path is string => path !== null);
 };
 
 export default function WorksDetail() {
@@ -98,44 +110,44 @@ export default function WorksDetail() {
     Array<{ type: "image"; src: string; alt: string }>
   >([]);
 
-  // 画像の存在確認
+  // 画像の存在確認（最適化版）
   useEffect(() => {
     if (work) {
       const generatedWireImages = generateWireImages(work.id, work.title);
       const generatedPcImages = generatePcImages(work.id, work.title);
       const generatedMobileImages = generateMobileImages(work.id, work.title);
 
-      // 各画像の存在を確認
+      // 並列で画像の存在を確認
       const checkImages = async () => {
-        // ワイヤーフレーム画像の確認
-        const existingWireImages = [];
-        for (const wireImg of generatedWireImages) {
-          const exists = await checkImageExists(wireImg.src);
-          if (exists) {
-            existingWireImages.push(wireImg);
-          }
-        }
-        setWireImages(existingWireImages);
+        const [wirePaths, pcPaths, mobilePaths] = await Promise.all([
+          checkImagesExist(generatedWireImages.map(img => img.src)),
+          checkImagesExist(generatedPcImages.map(img => img.src)),
+          checkImagesExist(generatedMobileImages.map(img => img.src))
+        ]);
 
-        // PC画像の確認
-        const existingPcImages = [];
-        for (const pcImg of generatedPcImages) {
-          const exists = await checkImageExists(pcImg.src);
-          if (exists) {
-            existingPcImages.push(pcImg);
-          }
-        }
-        setPcImages(existingPcImages);
+        setWireImages(
+          wirePaths.map((path, index) => ({
+            type: "image" as const,
+            src: path,
+            alt: `${work.title} - Wireframe ${index + 1}`,
+          }))
+        );
 
-        // モバイル画像の確認
-        const existingMobileImages = [];
-        for (const mobileImg of generatedMobileImages) {
-          const exists = await checkImageExists(mobileImg.src);
-          if (exists) {
-            existingMobileImages.push(mobileImg);
-          }
-        }
-        setMobileImages(existingMobileImages);
+        setPcImages(
+          pcPaths.map((path, index) => ({
+            type: "image" as const,
+            src: path,
+            alt: `${work.title} - PC ${index + 1}`,
+          }))
+        );
+
+        setMobileImages(
+          mobilePaths.map((path, index) => ({
+            type: "image" as const,
+            src: path,
+            alt: `${work.title} - Mobile ${index + 1}`,
+          }))
+        );
       };
 
       checkImages();
@@ -211,11 +223,12 @@ export default function WorksDetail() {
           {pcImages.length > 0 && (
             <div className="flex flex-row gap-2 md:gap-10">
               {pcImages.map((pcImg, index) => (
-                <div key={index}>
-                  <img
+                <div key={index} className="flex-1">
+                  <LazyImage
                     src={pcImg.src}
-                    className="object-cover"
                     alt={pcImg.alt}
+                    className="w-full"
+                    objectFit="contain"
                   />
                 </div>
               ))}
@@ -226,11 +239,12 @@ export default function WorksDetail() {
           {mobileImages.length > 0 && (
             <div className="flex flex-row gap-2 md:gap-10">
               {mobileImages.map((mobileImg, index) => (
-                <div key={index}>
-                  <img
+                <div key={index} className="flex-1">
+                  <LazyImage
                     src={mobileImg.src}
-                    className="object-cover"
                     alt={mobileImg.alt}
+                    className="w-full"
+                    objectFit="contain"
                   />
                 </div>
               ))}
@@ -241,13 +255,14 @@ export default function WorksDetail() {
           {wireImages.length > 0 && (
             <div className="flex flex-row gap-2 md:gap-10">
               {wireImages.map((wireImg, index) => (
-                <div key={index}>
-                  <img
+                <div key={index} className="flex-1">
+                  <LazyImage
                     src={wireImg.src}
-                    className="object-cover"
                     alt={wireImg.alt}
+                    className="w-full"
+                    objectFit="contain"
                   />
-                  <p>ワイヤーフレーム</p>
+                  <p className="mt-2 text-sm text-gray-400">ワイヤーフレーム</p>
                 </div>
               ))}
             </div>

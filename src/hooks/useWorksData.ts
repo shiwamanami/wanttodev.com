@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Works, validateWorksData, worksData } from "../data/works";
 import { worksDynamicData } from "../data/works-dynamic";
 import { readFromLocalStorage, saveToLocalStorage } from "../lib/fileUtils";
+import { autoGenerateWorksData } from "../lib/worksAutoGenerator";
 
 const STORAGE_KEY = "works-data-backup"; // バックアップ用に変更
 
@@ -15,6 +16,8 @@ export function useWorksData() {
       try {
         console.log("🔄 データ読み込み開始...");
 
+        let loadedWorks: Works[] = [];
+
         // まずローカルストレージをチェック
         const backupData = readFromLocalStorage(STORAGE_KEY);
         console.log("バックアップデータ:", backupData.length, "件");
@@ -27,7 +30,7 @@ export function useWorksData() {
           );
           const validData = backupData.filter(validateWorksData);
           console.log("バリデーション後のデータ件数:", validData.length, "件");
-          setWorks(validData);
+          loadedWorks = validData;
         } else {
           console.log("📋 ローカルストレージにデータがありません");
           console.log("TypeScriptファイルから読み込みます...");
@@ -39,9 +42,24 @@ export function useWorksData() {
             validData.length,
             "件"
           );
-          setWorks(validData);
-          // ローカルストレージにバックアップ
-          saveToLocalStorage(STORAGE_KEY, validData);
+          loadedWorks = validData;
+        }
+
+        // 自動生成機能: public/images/works内のフォルダから自動的にworksデータを生成
+        const mergedWorks = await autoGenerateWorksData(loadedWorks);
+
+        // データを設定
+        setWorks(mergedWorks);
+
+        // 自動生成されたデータがある場合は、ローカルストレージに保存
+        if (mergedWorks.length > loadedWorks.length) {
+          console.log(
+            `🆕 ${mergedWorks.length - loadedWorks.length}件の新規worksデータが自動生成されました`
+          );
+          saveToLocalStorage(STORAGE_KEY, mergedWorks);
+        } else if (backupData.length === 0) {
+          // 初回読み込み時は必ず保存
+          saveToLocalStorage(STORAGE_KEY, mergedWorks);
         }
       } catch (error) {
         console.error("❌ データの読み込みに失敗しました:", error);

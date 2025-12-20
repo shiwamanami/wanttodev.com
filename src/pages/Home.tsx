@@ -6,7 +6,7 @@ const Home: React.FC = () => {
   useDocumentTitle("Portfolio");
 
   return (
-    <div className="text-center">
+    <div className="h-full flex flex-col">
       <HeroSection />
     </div>
   );

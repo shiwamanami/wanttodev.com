@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import Header from "./components/Header";
 import Home from "./pages/Home";
 import About from "./pages/About";
@@ -23,8 +23,12 @@ declare global {
   }
 }
 
-const App: React.FC = () => {
+const AppContent: React.FC = () => {
   const vantaRef = useRef<HTMLDivElement>(null);
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
+  const isWorksPage = location.pathname === "/works";
+  const shouldUseHScreen = isHomePage || isWorksPage;
   
   // パフォーマンス監視を有効化
   usePerformanceMonitor();
@@ -58,16 +62,16 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <Router>
+    <>
       <ScrollToTop />
-      <div className="min-h-screen flex flex-col relative">
+      <div className={`${isHomePage ? "h-screen overflow-hidden" : shouldUseHScreen ? "h-screen" : "min-h-screen"} flex flex-col relative`}>
         <div
           ref={vantaRef}
           className="fixed inset-0 w-full h-full z-0"
           style={{ minHeight: "100vh" }}
         />
 
-        <div className="relative z-10 min-h-screen flex flex-col bg-transparent">
+        <div className={`relative z-10 ${shouldUseHScreen ? "h-screen" : "min-h-screen"} flex flex-col bg-transparent`}>
           <Header />
 
           <main className="flex-1">
@@ -87,6 +91,14 @@ const App: React.FC = () => {
           <Footer />
         </div>
       </div>
+    </>
+  );
+};
+
+const App: React.FC = () => {
+  return (
+    <Router>
+      <AppContent />
     </Router>
   );
 };

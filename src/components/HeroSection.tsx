@@ -5,7 +5,7 @@ import { FadeInStagger } from "./FadeInStagger";
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center mb-5 md:mb-10">
+    <section className="relative h-full flex items-center justify-center">
       <div className="w-full max-w-5xl mx-auto px-4 sm:px-0">
         <div className="text-center md:text-start">
           <h1 className="text-3xl sm:text-4xl lg:text-5xl !leading-loose xs:tracking-widest font-bold">

@@ -3,7 +3,7 @@ import { HeroSection } from "../components/HeroSection";
 import { useDocumentTitle } from "../hooks/useDocumentTitle";
 
 const Home: React.FC = () => {
-  useDocumentTitle("ホーム");
+  useDocumentTitle("Portfolio");
 
   return (
     <div className="text-center">

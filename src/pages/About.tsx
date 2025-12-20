@@ -11,6 +11,7 @@ import {
   marketingSkills,
 } from "../data/skills";
 import { ContactForm } from "../components/ContactForm";
+import { RecentBooks } from "../components/RecentBooks";
 
 export default function About() {
   // 令和年 = 西暦年 - 2018
@@ -34,6 +35,22 @@ export default function About() {
                 </span>
               </h3>
           </div>
+          <div className="flex flex-col md:flex-row gap-8 md:gap-20">
+              <h3 className="md:w-1/6 text-primary-500 text-nowrap">
+                Name
+                <span className="block text-sm md:text-base text-gray-300">
+                  名前
+                </span>
+              </h3>
+              <div className="md:w-5/6 space-y-10 md:space-y-16">
+              <h3 className="md:w-1/6 text-primary-500 text-nowrap">
+                Manami Shiwa
+                <span className="block text-sm md:text-base text-gray-300">
+                  志波 愛
+                </span>
+              </h3>
+              </div>
+            </div>
 
           <div className="space-y-20 md:space-y-40">
             <div className="flex flex-col md:flex-row gap-8 md:gap-20">
@@ -234,6 +251,18 @@ export default function About() {
                   <br />
                   常にユーザー体験を向上させる方法を模索しています。
                 </p>
+              </div>
+            </div>
+
+            <div className="flex flex-col md:flex-row gap-8 md:gap-20">
+              <h3 className="md:w-1/6 text-primary-500 text-nowrap">
+                Books
+                <span className="block text-sm md:text-base text-gray-300">
+                  最近読んだ本
+                </span>
+              </h3>
+              <div className="md:w-5/6">
+                <RecentBooks />
               </div>
             </div>
           </div>

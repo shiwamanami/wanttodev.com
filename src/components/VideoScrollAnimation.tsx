@@ -12,7 +12,7 @@ export const VideoScrollAnimation = ({
   videoSrc,
   children,
   className = "",
-}) => {
+}: VideoScrollAnimationProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isFixed, setIsFixed] = useState(false);

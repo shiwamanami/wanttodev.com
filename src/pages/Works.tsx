@@ -6,12 +6,13 @@ import { LazyImage } from "../components/LazyImage";
 import BasicAuth from "../components/BasicAuth";
 import { useAuth } from "../hooks/useAuth";
 import { useWorksData } from "../hooks/useWorksData";
+import { WorkCategory } from "../data/works";
 
 export default function Works() {
   const { isAuthenticated, isLoading, login, logout } = useAuth();
   const { works, isLoading: dataLoading } = useWorksData();
   const [showAuthModal, setShowAuthModal] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState("すべて");
+  const [selectedCategory, setSelectedCategory] = useState<WorkCategory | "すべて">("すべて");
 
   const allCategories = Array.from(
     new Set(works.flatMap((work) => work.category))
@@ -71,7 +72,7 @@ export default function Works() {
 
         <div>
           <div className="flex flex-wrap gap-2 md:gap-3 mb-16 md:mb-20">
-            {["すべて", ...allCategories].map((category) => (
+            {(["すべて", ...allCategories] as (WorkCategory | "すべて")[]).map((category) => (
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
@@ -99,7 +100,7 @@ export default function Works() {
                 .filter(
                   (work) =>
                     selectedCategory === "すべて" ||
-                    work.category.includes(selectedCategory)
+                    work.category.includes(selectedCategory as WorkCategory)
                 )
                 .map((work) => (
                   <Link

@@ -5,6 +5,7 @@ interface ButtonProps {
   children: ReactNode;
   className?: string;
   variant?: "default" | "outline";
+  size?: "sm" | "md" | "lg";
   onClick?: () => void;
   type?: "button" | "submit" | "reset";
   disabled?: boolean;

@@ -48,7 +48,7 @@ export interface SkillGroup {
 export const achievements: Achievement[] = [
   {
     text: "Web制作案件 ",
-    highlight: "30件以上",
+    highlight: "20件以上",
     textAfter: "を担当（コーポレートサイト、ECサイト、LPなど）",
   },
   {

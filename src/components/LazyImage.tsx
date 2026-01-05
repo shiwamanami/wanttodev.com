@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, ReactNode } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 interface LazyImageProps {
   src: string;
@@ -18,7 +18,7 @@ export const LazyImage = ({
   onLoad,
   onError,
   objectFit = 'contain',
-}) => {
+}: LazyImageProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(false);
   const [hasError, setHasError] = useState(false);
@@ -72,7 +72,7 @@ export const LazyImage = ({
           className={`w-full h-full transition-opacity duration-300 ${
             isLoaded ? 'opacity-100' : 'opacity-0'
           }`}
-          style={{ objectFit }}
+          style={{ objectFit: objectFit as React.CSSProperties['objectFit'] }}
           onLoad={handleLoad}
           onError={handleError}
           loading="lazy"

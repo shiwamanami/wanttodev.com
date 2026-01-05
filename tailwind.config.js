@@ -46,6 +46,9 @@ module.exports = {
           "serif",
         ],
       },
+      fontSize: {
+        xxs: ['0.625rem', { lineHeight: '0.65rem' }],
+      },
     },
   },
   plugins: [],

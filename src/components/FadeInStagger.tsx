@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState, useRef, ReactNode } from "react";
+import React, { useEffect, useState, useRef, ReactNode } from "react";
 
 const fadeInLeftStyle = `
   @keyframes fadeInLeft {

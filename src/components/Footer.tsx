@@ -2,15 +2,15 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-900/50 pt-20 pb-5">
+    <footer className="bg-gray-900/50 pt-20 pb-4">
       <div className="max-w-6xl mx-auto px-4 text-center">
-        <p className="text-xs">
+        <p className="text-xs !leading-none">
           &copy; {new Date().getFullYear()} WantToDev. All rights reserved.
         </p>
         <div>
           <Link
             to="/privacy-policy"
-            className="text-gray-400 hover:text-gray-100 transition-colors text-xs"
+            className="text-gray-400 hover:text-gray-100 transition-colors text-xxs"
           >
             プライバシーポリシー
           </Link>

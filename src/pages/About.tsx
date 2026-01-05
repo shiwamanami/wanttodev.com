@@ -27,9 +27,6 @@ import {
 } from "../data/about";
 import { useReiwaYear } from "../hooks/useReiwaYear";
 
-/**
- * Aboutページのメインコンポーネント
- */
 export default function About() {
   const currentYear = new Date().getFullYear();
   const reiwaYear = useReiwaYear();

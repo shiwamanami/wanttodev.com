@@ -1,5 +1,5 @@
 import React from "react";
-import SkillItem from "./SkillItem";
+import SkillItem from "./AboutSkillItem";
 import { Skill } from "../data/skills";
 
 interface AboutSkillGroupProps {
@@ -24,6 +24,7 @@ export function AboutSkillGroup({ title, skills }: AboutSkillGroupProps) {
             image={skill.image}
             alt={skill.alt}
             isSquare={skill.isSquare}
+            years={skill.years}
           />
         ))}
       </div>

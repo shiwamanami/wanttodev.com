@@ -17,7 +17,6 @@ import {
 } from "../data/skills";
 import {
   careerData,
-  experienceItems,
   teamWorkRoles,
   teamWorkDescription,
   problemSolvingCases,
@@ -107,26 +106,6 @@ export default function About() {
               </div>
             </AboutSection>
 
-            <AboutSection title="Experience" titleJa="経験年数">
-              <div className="space-y-6">
-                <AboutInfoBox title="主要技術スタック">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                    {experienceItems.map((item, index) => (
-                      <div key={index}>
-                        <span className="text-gray-300">{item.technology}:</span>
-                        <span className="ml-2 text-primary-400 font-semibold">
-                          {item.years}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                  <p className="mt-4 text-xs text-gray-400">
-                    ※ 実務経験年数に合わせて調整してください
-                  </p>
-                </AboutInfoBox>
-              </div>
-            </AboutSection>
-
             <AboutSection title="Team Work" titleJa="チーム開発">
               <div className="space-y-4">
                 <p className="whitespace-pre-line">{teamWorkDescription}</p>
@@ -186,9 +165,6 @@ export default function About() {
                     />
                   ))}
                 </div>
-                <p className="mt-4 text-sm text-gray-400">
-                  ※ 実際のGitHub、Zenn、QiitaのURLに置き換えてください
-                </p>
               </div>
             </AboutSection>
 

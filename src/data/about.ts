@@ -68,16 +68,6 @@ export const achievements: Achievement[] = [
   },
 ];
 
-// 経験年数
-export const experienceItems: ExperienceItem[] = [
-  { technology: "React / TypeScript", years: "2年以上" },
-  { technology: "PHP / MySQL", years: "2年以上" },
-  { technology: "WordPress", years: "2年以上" },
-  { technology: "Node.js", years: "1年以上" },
-  { technology: "Figma", years: "2年以上" },
-  { technology: "Git / GitHub", years: "2年以上" },
-];
-
 // チーム開発での役割
 export const teamWorkRoles: TeamWorkRole[] = [
   {
@@ -124,19 +114,19 @@ export const problemSolvingCases: ProblemSolvingCase[] = [
 export const socialLinks: SocialLink[] = [
   {
     name: "GitHub",
-    url: "https://github.com/your-username",
+    url: "https://github.com/shiwamanami",
     icon: "github",
   },
-  {
-    name: "Zenn",
-    url: "https://zenn.dev/your-username",
-    icon: "zenn",
-  },
-  {
-    name: "Qiita",
-    url: "https://qiita.com/your-username",
-    icon: "qiita",
-  },
+  // {
+  //   name: "Zenn",
+  //   url: "https://zenn.dev/your-username",
+  //   icon: "zenn",
+  // },
+  // {
+  //   name: "Qiita",
+  //   url: "https://qiita.com/your-username",
+  //   icon: "qiita",
+  // },
 ];
 
 // 趣味の説明

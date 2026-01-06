@@ -225,6 +225,229 @@ export const blogData: BlogPost[] = [
   },
   {
     id: 2,
+    title: "基本情報技術者試験の専門知識",
+    slug: "fe-exam-specialized-knowledge",
+    date: "2025-01-08",
+    category: ["学習", "技術"],
+    tags: ["基本情報技術者", "データベース", "アルゴリズム", "セキュリティ", "メモ"],
+    excerpt: "基本情報技術者試験で出題される専門知識。データベース、アルゴリズム、セキュリティ、システム開発、プロジェクトマネジメントなどの重要ポイント。",
+    content: `
+      <h2>データベース</h2>
+      <p>リレーショナルデータベースの基本概念。</p>
+
+      <h3>正規化</h3>
+      <ul>
+        <li><strong>第1正規形（1NF）</strong>: 繰り返しグループを排除</li>
+        <li><strong>第2正規形（2NF）</strong>: 部分関数従属を排除</li>
+        <li><strong>第3正規形（3NF）</strong>: 推移的関数従属を排除</li>
+        <li><strong>ボイス・コッド正規形（BCNF）</strong>: 決定子が候補キー</li>
+      </ul>
+
+      <h3>SQL</h3>
+      <pre><code>-- SELECT（検索）
+SELECT column1, column2 FROM table WHERE condition;
+
+-- INSERT（挿入）
+INSERT INTO table (column1, column2) VALUES (value1, value2);
+
+-- UPDATE（更新）
+UPDATE table SET column1 = value1 WHERE condition;
+
+-- DELETE（削除）
+DELETE FROM table WHERE condition;
+
+-- JOIN（結合）
+SELECT * FROM table1 INNER JOIN table2 ON table1.id = table2.id;
+SELECT * FROM table1 LEFT JOIN table2 ON table1.id = table2.id;</code></pre>
+
+      <h3>トランザクション</h3>
+      <ul>
+        <li><strong>ACID特性</strong>:
+          <ul>
+            <li>Atomicity（原子性）: すべて成功 or すべて失敗</li>
+            <li>Consistency（一貫性）: データの整合性を保つ</li>
+            <li>Isolation（独立性）: 他のトランザクションから分離</li>
+            <li>Durability（永続性）: コミット後は永続化</li>
+          </ul>
+        </li>
+        <li><strong>ロック</strong>: 排他制御（共有ロック、排他ロック）</li>
+        <li><strong>デッドロック</strong>: 相互待ち状態（回避が必要）</li>
+      </ul>
+
+      <h2>アルゴリズムとデータ構造</h2>
+      <p>基本的なアルゴリズムとデータ構造。</p>
+
+      <h3>データ構造</h3>
+      <ul>
+        <li><strong>配列</strong>: 連続したメモリ領域、ランダムアクセス可能</li>
+        <li><strong>連結リスト</strong>: ポインタで連結、挿入・削除が高速</li>
+        <li><strong>スタック</strong>: LIFO（Last In First Out）</li>
+        <li><strong>キュー</strong>: FIFO（First In First Out）</li>
+        <li><strong>木構造</strong>: 階層的なデータ構造</li>
+        <li><strong>ハッシュテーブル</strong>: キーから直接アクセス</li>
+      </ul>
+
+      <h3>探索アルゴリズム</h3>
+      <ul>
+        <li><strong>線形探索</strong>: O(n) - 順番に探索</li>
+        <li><strong>二分探索</strong>: O(log n) - ソート済み配列を半分ずつ</li>
+        <li><strong>ハッシュ探索</strong>: O(1) - ハッシュ値から直接アクセス</li>
+      </ul>
+
+      <h3>ソートアルゴリズム</h3>
+      <ul>
+        <li><strong>バブルソート</strong>: O(n²) - 隣同士を比較して交換</li>
+        <li><strong>選択ソート</strong>: O(n²) - 最小値を選択して先頭へ</li>
+        <li><strong>挿入ソート</strong>: O(n²) - 適切な位置に挿入</li>
+        <li><strong>クイックソート</strong>: O(n log n) - ピボットで分割</li>
+        <li><strong>マージソート</strong>: O(n log n) - 分割統治法</li>
+        <li><strong>ヒープソート</strong>: O(n log n) - ヒープ構造を利用</li>
+      </ul>
+
+      <h2>セキュリティ</h2>
+      <p>情報セキュリティの基本概念。</p>
+
+      <h3>脅威と対策</h3>
+      <ul>
+        <li><strong>マルウェア</strong>: ウイルス、ワーム、トロイの木馬</li>
+        <li><strong>DoS攻撃</strong>: サービス拒否攻撃</li>
+        <li><strong>DDoS攻撃</strong>: 分散型DoS攻撃</li>
+        <li><strong>SQLインジェクション</strong>: SQL文の注入攻撃</li>
+        <li><strong>XSS（Cross-Site Scripting）</strong>: スクリプトの注入</li>
+        <li><strong>CSRF（Cross-Site Request Forgery）</strong>: クロスサイトリクエストフォージェリ</li>
+      </ul>
+
+      <h3>暗号化</h3>
+      <ul>
+        <li><strong>共通鍵暗号方式</strong>: AES、DES（同じ鍵で暗号化・復号化）</li>
+        <li><strong>公開鍵暗号方式</strong>: RSA（公開鍵と秘密鍵のペア）</li>
+        <li><strong>ハッシュ関数</strong>: SHA-256、MD5（一方向関数）</li>
+        <li><strong>デジタル署名</strong>: 改ざん検知、なりすまし防止</li>
+      </ul>
+
+      <h3>認証と認可</h3>
+      <ul>
+        <li><strong>認証（Authentication）</strong>: 本人確認（パスワード、生体認証）</li>
+        <li><strong>認可（Authorization）</strong>: 権限確認（アクセス制御）</li>
+        <li><strong>多要素認証（MFA）</strong>: 複数の認証要素を組み合わせ</li>
+        <li><strong>OAuth</strong>: 認可フレームワーク</li>
+      </ul>
+
+      <h2>システム開発</h2>
+      <p>ソフトウェア開発の手法とプロセス。</p>
+
+      <h3>開発モデル</h3>
+      <ul>
+        <li><strong>ウォーターフォールモデル</strong>: 順次進行（要件定義→設計→実装→テスト）</li>
+        <li><strong>スパイラルモデル</strong>: リスク分析を繰り返し</li>
+        <li><strong>アジャイル開発</strong>: 反復的・漸進的開発（スクラム、XP）</li>
+        <li><strong>プロトタイプモデル</strong>: 試作を繰り返し</li>
+      </ul>
+
+      <h3>設計手法</h3>
+      <ul>
+        <li><strong>構造化設計</strong>: トップダウン設計</li>
+        <li><strong>オブジェクト指向設計</strong>: クラス、継承、カプセル化、ポリモーフィズム</li>
+        <li><strong>UML</strong>: 統一モデリング言語（クラス図、シーケンス図など）</li>
+      </ul>
+
+      <h3>テスト</h3>
+      <ul>
+        <li><strong>単体テスト</strong>: 個々のモジュールをテスト</li>
+        <li><strong>結合テスト</strong>: モジュール間の連携をテスト</li>
+        <li><strong>システムテスト</strong>: システム全体をテスト</li>
+        <li><strong>受け入れテスト</strong>: ユーザー要件を満たすか確認</li>
+        <li><strong>ホワイトボックステスト</strong>: 内部構造に基づくテスト</li>
+        <li><strong>ブラックボックステスト</strong>: 入出力に基づくテスト</li>
+      </ul>
+
+      <h2>プロジェクトマネジメント</h2>
+      <p>プロジェクトの計画・実行・管理。</p>
+
+      <h3>WBS（Work Breakdown Structure）</h3>
+      <ul>
+        <li>作業を階層的に分解</li>
+        <li>タスクの洗い出しと見積もり</li>
+      </ul>
+
+      <h3>ガントチャート</h3>
+      <ul>
+        <li>スケジュールを視覚化</li>
+        <li>タスクの開始・終了日を管理</li>
+      </ul>
+
+      <h3>PERT図</h3>
+      <ul>
+        <li>プロジェクトの依存関係を表現</li>
+        <li>クリティカルパスを特定</li>
+      </ul>
+
+      <h2>システム構成</h2>
+      <p>システムのアーキテクチャと構成。</p>
+
+      <h3>クライアントサーバーシステム</h3>
+      <ul>
+        <li><strong>2層構成</strong>: クライアント + サーバー</li>
+        <li><strong>3層構成</strong>: プレゼンテーション層 + アプリケーション層 + データ層</li>
+        <li><strong>n層構成</strong>: 複数層に分割</li>
+      </ul>
+
+      <h3>クラスタリング</h3>
+      <ul>
+        <li><strong>アクティブ・スタンバイ</strong>: 1台が待機</li>
+        <li><strong>アクティブ・アクティブ</strong>: 複数台で負荷分散</li>
+      </ul>
+
+      <h3>負荷分散</h3>
+      <ul>
+        <li><strong>ロードバランサー</strong>: リクエストを分散</li>
+        <li><strong>ラウンドロビン</strong>: 順番に振り分け</li>
+        <li><strong>最小接続数</strong>: 接続数が少ないサーバーに振り分け</li>
+      </ul>
+
+      <h2>システム監視と運用</h2>
+      <p>システムの監視と運用管理。</p>
+
+      <h3>監視項目</h3>
+      <ul>
+        <li><strong>CPU使用率</strong>: 処理能力の確認</li>
+        <li><strong>メモリ使用率</strong>: メモリ不足の検知</li>
+        <li><strong>ディスク使用率</strong>: 容量の確認</li>
+        <li><strong>ネットワークトラフィック</strong>: 通信量の監視</li>
+        <li><strong>レスポンスタイム</strong>: 応答時間の測定</li>
+      </ul>
+
+      <h3>ログ管理</h3>
+      <ul>
+        <li><strong>システムログ</strong>: OSやミドルウェアのログ</li>
+        <li><strong>アプリケーションログ</strong>: アプリの動作ログ</li>
+        <li><strong>アクセスログ</strong>: アクセス記録</li>
+        <li><strong>エラーログ</strong>: エラー情報</li>
+      </ul>
+
+      <h2>メモ</h2>
+      <ul>
+        <li>データベースは正規化で冗長性を排除（1NF→2NF→3NF→BCNF）</li>
+        <li>ACID特性でトランザクションの信頼性を保証</li>
+        <li>アルゴリズムの計算量: O(1) &lt; O(log n) &lt; O(n) &lt; O(n log n) &lt; O(n²)</li>
+        <li>セキュリティ: 機密性（Confidentiality）、完全性（Integrity）、可用性（Availability）</li>
+        <li>SQLインジェクション対策: プリペアドステートメントを使用</li>
+        <li>XSS対策: 入力値のエスケープ処理</li>
+        <li>ウォーターフォールは計画重視、アジャイルは変化対応重視</li>
+        <li>テストは単体→結合→システム→受け入れの順</li>
+        <li>WBSで作業を分解、ガントチャートでスケジュール管理</li>
+        <li>3層構成で保守性と拡張性を向上</li>
+        <li>負荷分散で可用性とパフォーマンスを向上</li>
+        <li>監視で障害を早期発見、ログで原因分析</li>
+      </ul>
+    `,
+    isPublished: true,
+    technologies: ["基本情報技術者", "データベース", "アルゴリズム", "セキュリティ"],
+    createdAt: "2025-01-08T00:00:00Z",
+    updatedAt: "2025-01-08T00:00:00Z",
+  },
+  {
+    id: 3,
     title: "HTMLパフォーマンス最適化",
     slug: "html-performance-optimization-resource-hints",
     date: "2024-12-10",
@@ -371,7 +594,7 @@ export const blogData: BlogPost[] = [
     updatedAt: "2024-12-10T00:00:00Z",
   },
   {
-    id: 3,
+    id: 4,
     title: "Web ComponentsとモダンAPI",
     slug: "modern-html-apis-web-components",
     date: "2024-12-05",
@@ -650,7 +873,7 @@ export const blogData: BlogPost[] = [
     updatedAt: "2024-12-05T00:00:00Z",
   },
   {
-    id: 4,
+    id: 5,
     title: "CSS GridとFlexboxの使い分け",
     slug: "css-grid-flexbox-usage",
     date: "2024-12-20",
@@ -773,7 +996,7 @@ export const blogData: BlogPost[] = [
     updatedAt: "2024-12-20T00:00:00Z",
   },
   {
-    id: 5,
+    id: 6,
     title: "Tailwind CSS上級テクニック",
     slug: "tailwind-css-advanced-techniques",
     date: "2024-12-25",
@@ -994,7 +1217,7 @@ module.exports = {
     updatedAt: "2024-12-25T00:00:00Z",
   },
   {
-    id: 6,
+    id: 7,
     title: "JavaScript基礎 - 変数とデータ型",
     slug: "javascript-basics-variables-data-types",
     date: "2024-12-28",
@@ -1124,7 +1347,7 @@ const message3 = \`
     updatedAt: "2024-12-28T00:00:00Z",
   },
   {
-    id: 7,
+    id: 8,
     title: "JavaScript基礎 - 関数と配列操作",
     slug: "javascript-basics-functions-arrays",
     date: "2024-12-28",
@@ -1305,7 +1528,7 @@ console.log(userName); // 'John'</code></pre>
     updatedAt: "2024-12-28T00:00:00Z",
   },
   {
-    id: 8,
+    id: 9,
     title: "JavaScriptで作る簡単なアニメーション",
     slug: "javascript-simple-animations",
     date: "2024-12-30",
@@ -1586,7 +1809,7 @@ moveRight();</code></pre>
     updatedAt: "2024-12-30T00:00:00Z",
   },
   {
-    id: 9,
+    id: 10,
     title: "React基礎 - コンポーネントとProps",
     slug: "react-basics-components-props",
     date: "2025-01-02",
@@ -1821,7 +2044,7 @@ function Mailbox({ unreadMessages }) {
     updatedAt: "2025-01-02T00:00:00Z",
   },
   {
-    id: 10,
+    id: 11,
     title: "React基礎 - StateとHooks",
     slug: "react-basics-state-hooks",
     date: "2025-01-02",
@@ -2090,7 +2313,7 @@ function Counter() {
     updatedAt: "2025-01-02T00:00:00Z",
   },
   {
-    id: 11,
+    id: 12,
     title: "エンジニアが知っておくべきネットワーク基礎",
     slug: "network-fundamentals-for-engineers",
     date: "2025-01-05",
@@ -2322,229 +2545,6 @@ function Counter() {
     technologies: ["ネットワーク", "HTTP", "TCP/IP"],
     createdAt: "2025-01-05T00:00:00Z",
     updatedAt: "2025-01-05T00:00:00Z",
-  },
-  {
-    id: 12,
-    title: "基本情報技術者試験の専門知識",
-    slug: "fe-exam-specialized-knowledge",
-    date: "2025-01-08",
-    category: ["学習", "技術"],
-    tags: ["基本情報技術者", "データベース", "アルゴリズム", "セキュリティ", "メモ"],
-    excerpt: "基本情報技術者試験で出題される専門知識。データベース、アルゴリズム、セキュリティ、システム開発、プロジェクトマネジメントなどの重要ポイント。",
-    content: `
-      <h2>データベース</h2>
-      <p>リレーショナルデータベースの基本概念。</p>
-
-      <h3>正規化</h3>
-      <ul>
-        <li><strong>第1正規形（1NF）</strong>: 繰り返しグループを排除</li>
-        <li><strong>第2正規形（2NF）</strong>: 部分関数従属を排除</li>
-        <li><strong>第3正規形（3NF）</strong>: 推移的関数従属を排除</li>
-        <li><strong>ボイス・コッド正規形（BCNF）</strong>: 決定子が候補キー</li>
-      </ul>
-
-      <h3>SQL</h3>
-      <pre><code>-- SELECT（検索）
-SELECT column1, column2 FROM table WHERE condition;
-
--- INSERT（挿入）
-INSERT INTO table (column1, column2) VALUES (value1, value2);
-
--- UPDATE（更新）
-UPDATE table SET column1 = value1 WHERE condition;
-
--- DELETE（削除）
-DELETE FROM table WHERE condition;
-
--- JOIN（結合）
-SELECT * FROM table1 INNER JOIN table2 ON table1.id = table2.id;
-SELECT * FROM table1 LEFT JOIN table2 ON table1.id = table2.id;</code></pre>
-
-      <h3>トランザクション</h3>
-      <ul>
-        <li><strong>ACID特性</strong>:
-          <ul>
-            <li>Atomicity（原子性）: すべて成功 or すべて失敗</li>
-            <li>Consistency（一貫性）: データの整合性を保つ</li>
-            <li>Isolation（独立性）: 他のトランザクションから分離</li>
-            <li>Durability（永続性）: コミット後は永続化</li>
-          </ul>
-        </li>
-        <li><strong>ロック</strong>: 排他制御（共有ロック、排他ロック）</li>
-        <li><strong>デッドロック</strong>: 相互待ち状態（回避が必要）</li>
-      </ul>
-
-      <h2>アルゴリズムとデータ構造</h2>
-      <p>基本的なアルゴリズムとデータ構造。</p>
-
-      <h3>データ構造</h3>
-      <ul>
-        <li><strong>配列</strong>: 連続したメモリ領域、ランダムアクセス可能</li>
-        <li><strong>連結リスト</strong>: ポインタで連結、挿入・削除が高速</li>
-        <li><strong>スタック</strong>: LIFO（Last In First Out）</li>
-        <li><strong>キュー</strong>: FIFO（First In First Out）</li>
-        <li><strong>木構造</strong>: 階層的なデータ構造</li>
-        <li><strong>ハッシュテーブル</strong>: キーから直接アクセス</li>
-      </ul>
-
-      <h3>探索アルゴリズム</h3>
-      <ul>
-        <li><strong>線形探索</strong>: O(n) - 順番に探索</li>
-        <li><strong>二分探索</strong>: O(log n) - ソート済み配列を半分ずつ</li>
-        <li><strong>ハッシュ探索</strong>: O(1) - ハッシュ値から直接アクセス</li>
-      </ul>
-
-      <h3>ソートアルゴリズム</h3>
-      <ul>
-        <li><strong>バブルソート</strong>: O(n²) - 隣同士を比較して交換</li>
-        <li><strong>選択ソート</strong>: O(n²) - 最小値を選択して先頭へ</li>
-        <li><strong>挿入ソート</strong>: O(n²) - 適切な位置に挿入</li>
-        <li><strong>クイックソート</strong>: O(n log n) - ピボットで分割</li>
-        <li><strong>マージソート</strong>: O(n log n) - 分割統治法</li>
-        <li><strong>ヒープソート</strong>: O(n log n) - ヒープ構造を利用</li>
-      </ul>
-
-      <h2>セキュリティ</h2>
-      <p>情報セキュリティの基本概念。</p>
-
-      <h3>脅威と対策</h3>
-      <ul>
-        <li><strong>マルウェア</strong>: ウイルス、ワーム、トロイの木馬</li>
-        <li><strong>DoS攻撃</strong>: サービス拒否攻撃</li>
-        <li><strong>DDoS攻撃</strong>: 分散型DoS攻撃</li>
-        <li><strong>SQLインジェクション</strong>: SQL文の注入攻撃</li>
-        <li><strong>XSS（Cross-Site Scripting）</strong>: スクリプトの注入</li>
-        <li><strong>CSRF（Cross-Site Request Forgery）</strong>: クロスサイトリクエストフォージェリ</li>
-      </ul>
-
-      <h3>暗号化</h3>
-      <ul>
-        <li><strong>共通鍵暗号方式</strong>: AES、DES（同じ鍵で暗号化・復号化）</li>
-        <li><strong>公開鍵暗号方式</strong>: RSA（公開鍵と秘密鍵のペア）</li>
-        <li><strong>ハッシュ関数</strong>: SHA-256、MD5（一方向関数）</li>
-        <li><strong>デジタル署名</strong>: 改ざん検知、なりすまし防止</li>
-      </ul>
-
-      <h3>認証と認可</h3>
-      <ul>
-        <li><strong>認証（Authentication）</strong>: 本人確認（パスワード、生体認証）</li>
-        <li><strong>認可（Authorization）</strong>: 権限確認（アクセス制御）</li>
-        <li><strong>多要素認証（MFA）</strong>: 複数の認証要素を組み合わせ</li>
-        <li><strong>OAuth</strong>: 認可フレームワーク</li>
-      </ul>
-
-      <h2>システム開発</h2>
-      <p>ソフトウェア開発の手法とプロセス。</p>
-
-      <h3>開発モデル</h3>
-      <ul>
-        <li><strong>ウォーターフォールモデル</strong>: 順次進行（要件定義→設計→実装→テスト）</li>
-        <li><strong>スパイラルモデル</strong>: リスク分析を繰り返し</li>
-        <li><strong>アジャイル開発</strong>: 反復的・漸進的開発（スクラム、XP）</li>
-        <li><strong>プロトタイプモデル</strong>: 試作を繰り返し</li>
-      </ul>
-
-      <h3>設計手法</h3>
-      <ul>
-        <li><strong>構造化設計</strong>: トップダウン設計</li>
-        <li><strong>オブジェクト指向設計</strong>: クラス、継承、カプセル化、ポリモーフィズム</li>
-        <li><strong>UML</strong>: 統一モデリング言語（クラス図、シーケンス図など）</li>
-      </ul>
-
-      <h3>テスト</h3>
-      <ul>
-        <li><strong>単体テスト</strong>: 個々のモジュールをテスト</li>
-        <li><strong>結合テスト</strong>: モジュール間の連携をテスト</li>
-        <li><strong>システムテスト</strong>: システム全体をテスト</li>
-        <li><strong>受け入れテスト</strong>: ユーザー要件を満たすか確認</li>
-        <li><strong>ホワイトボックステスト</strong>: 内部構造に基づくテスト</li>
-        <li><strong>ブラックボックステスト</strong>: 入出力に基づくテスト</li>
-      </ul>
-
-      <h2>プロジェクトマネジメント</h2>
-      <p>プロジェクトの計画・実行・管理。</p>
-
-      <h3>WBS（Work Breakdown Structure）</h3>
-      <ul>
-        <li>作業を階層的に分解</li>
-        <li>タスクの洗い出しと見積もり</li>
-      </ul>
-
-      <h3>ガントチャート</h3>
-      <ul>
-        <li>スケジュールを視覚化</li>
-        <li>タスクの開始・終了日を管理</li>
-      </ul>
-
-      <h3>PERT図</h3>
-      <ul>
-        <li>プロジェクトの依存関係を表現</li>
-        <li>クリティカルパスを特定</li>
-      </ul>
-
-      <h2>システム構成</h2>
-      <p>システムのアーキテクチャと構成。</p>
-
-      <h3>クライアントサーバーシステム</h3>
-      <ul>
-        <li><strong>2層構成</strong>: クライアント + サーバー</li>
-        <li><strong>3層構成</strong>: プレゼンテーション層 + アプリケーション層 + データ層</li>
-        <li><strong>n層構成</strong>: 複数層に分割</li>
-      </ul>
-
-      <h3>クラスタリング</h3>
-      <ul>
-        <li><strong>アクティブ・スタンバイ</strong>: 1台が待機</li>
-        <li><strong>アクティブ・アクティブ</strong>: 複数台で負荷分散</li>
-      </ul>
-
-      <h3>負荷分散</h3>
-      <ul>
-        <li><strong>ロードバランサー</strong>: リクエストを分散</li>
-        <li><strong>ラウンドロビン</strong>: 順番に振り分け</li>
-        <li><strong>最小接続数</strong>: 接続数が少ないサーバーに振り分け</li>
-      </ul>
-
-      <h2>システム監視と運用</h2>
-      <p>システムの監視と運用管理。</p>
-
-      <h3>監視項目</h3>
-      <ul>
-        <li><strong>CPU使用率</strong>: 処理能力の確認</li>
-        <li><strong>メモリ使用率</strong>: メモリ不足の検知</li>
-        <li><strong>ディスク使用率</strong>: 容量の確認</li>
-        <li><strong>ネットワークトラフィック</strong>: 通信量の監視</li>
-        <li><strong>レスポンスタイム</strong>: 応答時間の測定</li>
-      </ul>
-
-      <h3>ログ管理</h3>
-      <ul>
-        <li><strong>システムログ</strong>: OSやミドルウェアのログ</li>
-        <li><strong>アプリケーションログ</strong>: アプリの動作ログ</li>
-        <li><strong>アクセスログ</strong>: アクセス記録</li>
-        <li><strong>エラーログ</strong>: エラー情報</li>
-      </ul>
-
-      <h2>メモ</h2>
-      <ul>
-        <li>データベースは正規化で冗長性を排除（1NF→2NF→3NF→BCNF）</li>
-        <li>ACID特性でトランザクションの信頼性を保証</li>
-        <li>アルゴリズムの計算量: O(1) &lt; O(log n) &lt; O(n) &lt; O(n log n) &lt; O(n²)</li>
-        <li>セキュリティ: 機密性（Confidentiality）、完全性（Integrity）、可用性（Availability）</li>
-        <li>SQLインジェクション対策: プリペアドステートメントを使用</li>
-        <li>XSS対策: 入力値のエスケープ処理</li>
-        <li>ウォーターフォールは計画重視、アジャイルは変化対応重視</li>
-        <li>テストは単体→結合→システム→受け入れの順</li>
-        <li>WBSで作業を分解、ガントチャートでスケジュール管理</li>
-        <li>3層構成で保守性と拡張性を向上</li>
-        <li>負荷分散で可用性とパフォーマンスを向上</li>
-        <li>監視で障害を早期発見、ログで原因分析</li>
-      </ul>
-    `,
-    isPublished: true,
-    technologies: ["基本情報技術者", "データベース", "アルゴリズム", "セキュリティ"],
-    createdAt: "2025-01-08T00:00:00Z",
-    updatedAt: "2025-01-08T00:00:00Z",
   },
 ];
 

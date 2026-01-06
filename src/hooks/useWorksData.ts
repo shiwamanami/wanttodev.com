@@ -122,6 +122,51 @@ export function useWorksData() {
     return works.find((work) => work.id === id);
   };
 
+  // 画像フォルダを再スキャンして新規worksデータを追加
+  const rescanWorksFolders = async () => {
+    try {
+      console.log("🔍 画像フォルダを再スキャン中...");
+      setIsLoading(true);
+      
+      // 現在のworksデータを取得（ローカルストレージから確実に取得）
+      let currentWorks: Works[] = [];
+      const backupData = readFromLocalStorage(STORAGE_KEY);
+      
+      if (backupData.length > 0) {
+        currentWorks = backupData.filter(validateWorksData);
+      } else {
+        // ローカルストレージにない場合はTypeScriptファイルから読み込み
+        const validData = worksDynamicData.filter(validateWorksData);
+        currentWorks = validData;
+      }
+      
+      console.log(`📊 現在のworksデータ: ${currentWorks.length}件`);
+      
+      // 自動生成機能を実行
+      const mergedWorks = await autoGenerateWorksData(currentWorks);
+      
+      // データを設定
+      setWorks(mergedWorks);
+      
+      // ローカルストレージに保存
+      saveToLocalStorage(STORAGE_KEY, mergedWorks);
+      
+      const newCount = mergedWorks.length - currentWorks.length;
+      if (newCount > 0) {
+        console.log(`✅ ${newCount}件の新規worksデータが追加されました`);
+        alert(`${newCount}件の新規worksデータが追加されました`);
+      } else {
+        console.log("ℹ️ 新規のworksデータはありませんでした");
+        alert("新規のworksデータは見つかりませんでした");
+      }
+    } catch (error) {
+      console.error("❌ 再スキャンに失敗しました:", error);
+      alert("再スキャンに失敗しました。コンソールを確認してください。");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return {
     works,
     isLoading,
@@ -131,5 +176,6 @@ export function useWorksData() {
     deleteWork,
     resetWorks,
     getWork,
+    rescanWorksFolders,
   };
 }

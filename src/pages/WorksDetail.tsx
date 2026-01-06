@@ -158,7 +158,7 @@ export default function WorksDetail() {
     }
   }, [work]);
 
-  if (!work) {
+  if (!work || !work.isVisible) {
     return (
       <div className="flex min-h-screen flex-col relative">
         <section className="container max-w-6xl py-10 sm:py-20">

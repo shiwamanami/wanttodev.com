@@ -45,7 +45,7 @@ export function RecentBooks() {
           書籍情報が見つかりませんでした。
           <br />
           <span className="text-sm">
-            ISBNコードが正しいか、openBDにデータが存在するか確認してください。
+            ISBNコードが正しいか確認してください。
           </span>
         </p>
       </div>
@@ -53,7 +53,7 @@ export function RecentBooks() {
   }
 
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
+    <div className="grid grid-cols-4 lg:grid-cols-5 gap-4 md:gap-8">
       {books.map((book) => (
         <BookCard key={book.isbn} book={book} />
       ))}

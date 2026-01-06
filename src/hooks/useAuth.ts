@@ -76,3 +76,47 @@ export function useAuth() {
     logout,
   };
 }
+
+// Admin用の認証フック
+export function useAdminAuth() {
+  const [authState, setAuthState] = useState<AuthState>({
+    isAuthenticated: false,
+    isLoading: true,
+  });
+
+  // 認証成功時の処理（AdminAuthコンポーネントから呼び出される）
+  const login = () => {
+    // 認証状態を再チェックしてから設定
+    const isAuth = checkAuth("admin_auth");
+    setAuthState({
+      isAuthenticated: isAuth,
+      isLoading: false,
+    });
+  };
+
+  // ログアウト処理
+  const logout = () => {
+    localStorage.removeItem("admin_auth");
+    localStorage.removeItem("admin_auth_timestamp");
+    setAuthState({
+      isAuthenticated: false,
+      isLoading: false,
+    });
+  };
+
+  // コンポーネントマウント時に認証状態をチェック
+  useEffect(() => {
+    const isAuth = checkAuth("admin_auth");
+    setAuthState({
+      isAuthenticated: isAuth,
+      isLoading: false,
+    });
+  }, []);
+
+  return {
+    isAuthenticated: authState.isAuthenticated,
+    isLoading: authState.isLoading,
+    login,
+    logout,
+  };
+}

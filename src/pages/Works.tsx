@@ -15,7 +15,7 @@ export default function Works() {
   const [selectedCategory, setSelectedCategory] = useState<WorkCategory | "すべて">("すべて");
 
   const allCategories = Array.from(
-    new Set(works.flatMap((work) => work.category))
+    new Set(works.filter((work) => work.isVisible).flatMap((work) => work.category))
   ).sort();
 
   // 認証が必要な場合の処理
@@ -99,8 +99,9 @@ export default function Works() {
               {works
                 .filter(
                   (work) =>
-                    selectedCategory === "すべて" ||
-                    work.category.includes(selectedCategory as WorkCategory)
+                    work.isVisible &&
+                    (selectedCategory === "すべて" ||
+                      work.category.includes(selectedCategory as WorkCategory))
                 )
                 .map((work) => (
                   <Link

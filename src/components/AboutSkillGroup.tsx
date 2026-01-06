@@ -14,9 +14,9 @@ export function AboutSkillGroup({ title, skills }: AboutSkillGroupProps) {
   return (
     <div>
       <h4 className="mb-4 md:mb-6">
-        <span className="border-b border-primary-500/50 pb-0.5">{title}</span>
+        <span className="border border-primary-500/50 bg-black/60 p-1">{title}</span>
       </h4>
-      <div className="flex flex-wrap gap-6 md:gap-8">
+      <div className="flex flex-wrap gap-4 md:gap-6">
         {skills.map((skill, index) => (
           <SkillItem
             key={`${skill.name}-${index}`}

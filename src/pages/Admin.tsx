@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "../components/Button";
-import BasicAuth from "../components/BasicAuth";
+import AdminAuth from "../components/AdminAuth";
 import ImageUpload from "../components/ImageUpload";
 import {
   Works,
@@ -9,17 +9,18 @@ import {
   TECHNOLOGIES,
   validateWorksData,
 } from "../data/works";
-import { useAuth } from "../hooks/useAuth";
+import { useAdminAuth } from "../hooks/useAuth";
 import { useWorksData } from "../hooks/useWorksData";
 
 export default function Admin() {
-  const { isAuthenticated, isLoading, login, logout } = useAuth();
+  const { isAuthenticated, isLoading, login, logout } = useAdminAuth();
   const {
     works,
     isLoading: dataLoading,
     addWork,
     updateWork,
     deleteWork,
+    rescanWorksFolders,
   } = useWorksData();
   const [editingWork, setEditingWork] = useState<Works | null>(null);
   const [showForm, setShowForm] = useState(false);
@@ -93,7 +94,7 @@ export default function Admin() {
           <Button onClick={() => setShowAuthModal(true)}>Login</Button>
         </div>
         {showAuthModal && (
-          <BasicAuth
+          <AdminAuth
             onAuthSuccess={() => {
               setShowAuthModal(false);
               login();
@@ -357,6 +358,14 @@ export default function Admin() {
             }}
           >
             ファイルをリアルタイム更新
+          </Button>
+          <Button
+            variant="outline"
+            onClick={async () => {
+              await rescanWorksFolders();
+            }}
+          >
+            画像フォルダを再スキャン
           </Button>
           <Button
             variant="outline"
@@ -817,7 +826,18 @@ export default function Admin() {
 
                 {/* 作品情報 */}
                 <div className="flex-1 min-w-0">
-                  <h3 className="text-xl font-bold mb-2">{work.title}</h3>
+                  <div className="flex items-center gap-2 mb-2">
+                    <h3 className="text-xl font-bold">{work.title}</h3>
+                    <span
+                      className={`px-2 py-1 text-xs rounded ${
+                        work.isVisible
+                          ? "bg-green-600 text-white"
+                          : "bg-gray-600 text-gray-300"
+                      }`}
+                    >
+                      {work.isVisible ? "表示中" : "非表示"}
+                    </span>
+                  </div>
                   <p className="text-gray-400 mb-2">{work.date}</p>
                   <div className="flex flex-wrap gap-2 mb-2">
                     {work.category.map((cat, index) => (

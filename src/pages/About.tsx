@@ -3,7 +3,6 @@ import { Button } from "../components/Button";
 import { ContactForm } from "../components/ContactForm";
 import { RecentBooks } from "../components/RecentBooks";
 import { AboutSection } from "../components/AboutSection";
-import { AboutInfoBox } from "../components/AboutInfoBox";
 import { AboutSkillGroup } from "../components/AboutSkillGroup";
 import { AboutSocialLinkButton } from "../components/AboutSocialLinkButton";
 import {
@@ -17,10 +16,6 @@ import {
 } from "../data/skills";
 import {
   careerData,
-  teamWorkRoles,
-  teamWorkDescription,
-  problemSolvingCases,
-  problemSolvingDescription,
   hobbyDescription,
   socialLinks,
 } from "../data/about";
@@ -68,34 +63,17 @@ export default function About() {
                         ? `2023年(令和5年) – ${currentYear}年(令和${reiwaYear}年) 現在`
                         : career.period}
                     </h4>
-                    <p className="whitespace-pre-line">{career.description}</p>
-                    {career.achievements && (
-                      <AboutInfoBox title="主な実績" className="mt-6">
-                        <ul className="space-y-2 text-sm">
-                          {career.achievements.map((achievement, idx) => (
-                            <li key={idx} className="flex items-start">
-                              <span className="text-primary-500 mr-2">•</span>
-                              <span>
-                                {achievement.text}
-                                {achievement.highlight && (
-                                  <strong className="text-primary-400">
-                                    {achievement.highlight}
-                                  </strong>
-                                )}
-                                {achievement.textAfter}
-                              </span>
-                            </li>
-                          ))}
-                        </ul>
-                      </AboutInfoBox>
-                    )}
+                    <p
+                      className="whitespace-pre-line"
+                      dangerouslySetInnerHTML={{ __html: career.description }}
+                    />
                   </div>
                 ))}
               </div>
             </AboutSection>
 
             <AboutSection title="Skill" titleJa="スキル" className="text-nowrap">
-              <div className="space-y-14 md:space-y-28">
+              <div className="space-y-14 md:space-y-20">
                 {skillGroups.map((group, index) => (
                   <AboutSkillGroup
                     key={index}
@@ -103,53 +81,6 @@ export default function About() {
                     skills={group.skills}
                   />
                 ))}
-              </div>
-            </AboutSection>
-
-            <AboutSection title="Team Work" titleJa="チーム開発">
-              <div className="space-y-4">
-                <p className="whitespace-pre-line">{teamWorkDescription}</p>
-                <AboutInfoBox title="チーム開発での役割">
-                  <ul className="space-y-2 text-sm">
-                    {teamWorkRoles.map((role, index) => (
-                      <li key={index} className="flex items-start">
-                        <span className="text-primary-500 mr-2">•</span>
-                        <span>{role.description}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </AboutInfoBox>
-              </div>
-            </AboutSection>
-
-            <AboutSection title="Problem Solving" titleJa="問題解決">
-              <div className="space-y-6">
-                <p className="whitespace-pre-line">
-                  {problemSolvingDescription}
-                </p>
-                <AboutInfoBox title="具体的な課題解決事例">
-                  <div className="space-y-4 text-sm">
-                    {problemSolvingCases.map((case_, index) => (
-                      <div key={index}>
-                        <h6 className="text-primary-300 mb-2 font-medium">
-                          {case_.title}
-                        </h6>
-                        <p className="text-gray-300">
-                          {case_.description}
-                          {case_.highlight && (
-                            <strong className="text-primary-400">
-                              {case_.highlight}
-                            </strong>
-                          )}
-                          {case_.descriptionAfter}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                  <p className="mt-4 text-xs text-gray-400">
-                    ※ 実際の事例に合わせて数値や内容を調整してください
-                  </p>
-                </AboutInfoBox>
               </div>
             </AboutSection>
 

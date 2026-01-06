@@ -17,20 +17,26 @@ const checkImageExists = (src: string): Promise<boolean> => {
  * サムネイル画像の存在を確認して、有効なフォルダを判定
  */
 export async function detectWorksFolders(
-  maxId: number = 20
+  maxId: number = 100
 ): Promise<number[]> {
   const detectedFolders: number[] = [];
   const checkPromises: Promise<boolean>[] = [];
 
   // 1からmaxIdまで順番にチェック
   for (let id = 1; id <= maxId; id++) {
-    const thumbnailPath = `/images/works/${id}/thumbnail.webp`;
+    // thumbnail.webpとthumbnail.pngの両方をチェック
+    const thumbnailWebpPath = `/images/works/${id}/thumbnail.webp`;
+    const thumbnailPngPath = `/images/works/${id}/thumbnail.png`;
+    
     checkPromises.push(
-      checkImageExists(thumbnailPath).then((exists) => {
-        if (exists) {
+      Promise.all([
+        checkImageExists(thumbnailWebpPath),
+        checkImageExists(thumbnailPngPath)
+      ]).then(([existsWebp, existsPng]) => {
+        if (existsWebp || existsPng) {
           detectedFolders.push(id);
         }
-        return exists;
+        return existsWebp || existsPng;
       })
     );
   }

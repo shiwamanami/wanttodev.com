@@ -30,12 +30,12 @@ export default function Blog() {
   return (
     <div className="flex min-h-screen flex-col relative">
       <section className="container max-w-6xl py-10 sm:py-20">
-        <div className="mb-8">
+        <div className="mb-8 md:mb-16">
           <h2>
             BLOG
             <span>技術ブログ</span>
           </h2>
-          <p className="mt-4 text-gray-300">
+          <p className="text-center mt-4">
             日頃から学んだ技術や知見をメモ代わりに使用しています。
           </p>
         </div>

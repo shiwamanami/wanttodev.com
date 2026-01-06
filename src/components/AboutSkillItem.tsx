@@ -51,7 +51,7 @@ export default function SkillItem({
   };
 
   return (
-    <div className={`flex flex-col items-center space-y-2 ${className}`}>
+    <div className={`flex flex-col items-center space-y-1 ${className}`}>
       <div className="flex items-center space-x-3">
         <div
           className={`${
@@ -68,14 +68,14 @@ export default function SkillItem({
               onError={handleImageError}
             />
           ) : (
-            <div className="w-full h-full flex items-center justify-center text-sm md:text-base font-medium text-center">
+            <div className="w-full h-full flex items-center justify-center text-sm md:text-base text-center">
               {name}
             </div>
           )}
         </div>
       </div>
       {years !== undefined && (
-        <span className="text-xs md:text-sm text-gray-300">
+        <span className="text-xs md:text-sm">
           {typeof years === "number" ? `${years}年` : years}
         </span>
       )}

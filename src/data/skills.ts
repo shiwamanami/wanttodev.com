@@ -3,7 +3,7 @@ export interface Skill {
   image: string;
   alt?: string;
   isSquare?: boolean;
-  years?: number | string; // 経験年数（数値の場合は「○年」、文字列の場合はそのまま表示）
+  years?: number | string;
 }
 
 export const frontendSkills: Skill[] = [
@@ -20,9 +20,10 @@ export const frontendSkills: Skill[] = [
 ];
 
 export const backendSkills: Skill[] = [
-  { name: "Node.js", image: "nodejs-dark.svg", years: 3 },
-  { name: "PHP", image: "php.svg", years: 4 },
-  { name: "MySQL", image: "mysql.png", isSquare: false, years: 4 },
+  { name: "Node.js", image: "nodejs-dark.svg", isSquare: false, years: 3 },
+  { name: "PHP", image: "php.svg", isSquare: false, years: 3 },
+  { name: "Laravel", image: "laravel.svg", isSquare: false, years: "少しだけ" },
+  { name: "MySQL", image: "mysql.png", isSquare: false, years: 3 },
 ];
 
 export const designSkills: Skill[] = [
@@ -37,28 +38,29 @@ export const cmsSkills: Skill[] = [
 ];
 
 export const otherSkills: Skill[] = [
-  { name: "GitHub", image: "github-dark.png", years: 4 },
+  { name: "GitHub", image: "github-dark.png", isSquare: false, years: 4 },
   { name: "microCMS", image: "microCMS_dark.svg", isSquare: false, years: 2 },
   { name: "Netlify", image: "netlify-dark.svg", isSquare: false, years: 2 },
   { name: "Vercel", image: "vercel-dark.svg", isSquare: false, years: 2 },
 ];
 
 export const ecSkills: Skill[] = [
-  { name: "Stripe", image: "", isSquare: false, years: 2 },
+  { name: "Stripe", image: "stripe.svg", isSquare: false, years: 3 },
   { name: "ecforce", image: "", isSquare: false, years: 2 },
   { name: "EBISUMART", image: "", isSquare: false, years: 2 },
-  { name: "Shopify", image: "", isSquare: false, years: 1 },
-  { name: "Bカート", image: "", isSquare: false, years: 1 },
+  { name: "Shopify", image: "shopify-dark.svg", isSquare: false, years: 2 },
+  { name: "Bカート", image: "bcart.png", isSquare: false, years: 1 },
+  { name: "W2 Repeat", image: "", isSquare: false, years: "少しだけ" },
 ];
 
 export const marketingSkills: Skill[] = [
-  { name: "Google Analytics", image: "Google-Analytics.png", isSquare: false, years: 2 },
+  { name: "Google Analytics", image: "Google-Analytics.png", isSquare: false, years: 4 },
   {
     name: "Google Search Console",
     image: "Google-search-console.svg",
     isSquare: false,
-    years: 2,
+    years: 4,
   },
-  { name: "Google Ads", image: "Google-Ads.png", isSquare: false, years: 2 },
+  { name: "Google Ads", image: "Google-Ads.png", isSquare: false, years: 1 },
   { name: "Looker Studio", image: "", isSquare: false, years: 1 },
 ];

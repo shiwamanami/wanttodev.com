@@ -26,86 +26,39 @@ export interface SocialLink {
 export interface CareerPeriod {
   period: string;
   description: string;
-  achievements?: Achievement[];
 }
 
-export interface SkillGroup {
-  title: string;
-  skills: Array<{
-    name: string;
-    image: string;
-    alt?: string;
-    isSquare?: boolean;
-  }>;
-}
-
-// 主な実績
-export const achievements: Achievement[] = [
+// 経歴
+export const careerData: CareerPeriod[] = [
   {
-    text: "Web制作案件 ",
-    highlight: "20件以上",
-    textAfter: "を担当（コーポレートサイト、ECサイト、LPなど）",
+    period: "2023年(令和5年) – 現在",
+    description: `プログラマー兼デザイナー兼ディレクターとして、単なる制作に留まらず、UI/UX設計からフロントエンド（HTML/CSS/JS）、バックエンド（PHP/Node.js）までワンストップで実装する開発力を磨く。
+    
+    <strong>・Web制作:</strong>
+    ディレクションからデザイン、実装、運用、マーケティングまで一貫して、コーポレートサイト、EC、LPなど多岐にわたるWeb制作を完遂。
+    
+    <strong>・開発・運用:</strong>
+    クライアントに合わせたカートシステムに最適化したEC構築・保守運用や、WordPressのカスタム実装等を一貫して担当。
+    
+    <strong>・マーケティング:</strong>
+    広告計測設定やSEO対策を支援し、デザインとエンジニアリングの両軸からクライアントのCV率向上に貢献。
+    
+    <strong>・広告運用:</strong>
+    Google Adsの運用を担当し、クリエイティブの最適化やキャンペーンの効果測定、施策の立案を行う。
+    
+    <strong>・業務効率化（DX）:</strong>
+    既存の制作フローを根本から見直し、属人化していた手動プロセスをスクリプト等でシステム化し、ヒューマンエラーの排除と一貫した品質管理の両立を実現。
+    繰り返し作業を削減し、組織全体の運用効率を大幅に向上させる。`,
   },
   {
-    text: "ECサイト構築・運用経験（Shopify、ecforce、Bカート、EBISUMARTなど）",
-  },
-  {
-    text: "WordPressサイト構築・保守運用（カスタムテーマ開発、プラグイン開発含む）",
-  },
-  {
-    text: "React/TypeScriptを使用したSPA個人開発経験",
-  },
-  {
-    text: "SEO対策・Google Analytics/Ads設定によるマーケティング施策",
-  },
-  {
-    text: "チーム開発経験（Git/GitHubを使用したバージョン管理、コードレビュー）",
+    period: "2022年(令和4年)",
+    description: `新卒でホテルのパティシエとして勤務。
+    現場での経験を積む傍ら、エンジニアへの転身を目指して独学を開始。
+    業務終了後や休日をすべて学習に充て、現在の技術基盤を構築。`,
   },
 ];
 
-// チーム開発での役割
-export const teamWorkRoles: TeamWorkRole[] = [
-  {
-    description: "Git/GitHubを使用したブランチ戦略の実践（feature/develop/mainブランチ運用）",
-  },
-  {
-    description: "コードレビューによる品質向上への貢献",
-  },
-  {
-    description: "クライアントとの要件定義・ヒアリング、進捗報告",
-  },
-  {
-    description: "技術的な課題解決の提案と実装",
-  },
-];
-
-// 問題解決事例
-export const problemSolvingCases: ProblemSolvingCase[] = [
-  {
-    title: "パフォーマンス最適化",
-    description:
-      "Reactアプリケーションのレンダリング最適化により、ページ読み込み速度を",
-    highlight: "30%改善",
-    descriptionAfter:
-      "。画像最適化、コード分割、レイジーローディングの実装により、ユーザー体験を向上。",
-  },
-  {
-    title: "SEO対策・コンバージョン改善",
-    description:
-      "Google Analytics/Google Search Consoleを活用したデータ分析により、SEO施策の実施とUI/UX改善を行い、",
-    highlight: "CV率の向上",
-    descriptionAfter: "に貢献。",
-  },
-  {
-    title: "運用効率化",
-    description:
-      "WordPressサイトのカスタム開発により、クライアントの運用負担を軽減。管理画面のカスタマイズや自動化機能の実装により、",
-    highlight: "運用時間を削減",
-    descriptionAfter: "。",
-  },
-];
-
-// ソーシャルリンク（実際のURLに置き換えてください）
+// ソーシャルリンク
 export const socialLinks: SocialLink[] = [
   {
     name: "GitHub",
@@ -124,38 +77,12 @@ export const socialLinks: SocialLink[] = [
   // },
 ];
 
-// 趣味の説明
-export const hobbyDescription = `新しい技術の学習、個人開発、テックブログを読むこと、読書、カフェオレを飲みながらのコーディングが好きです。
-常にユーザー体験を向上させる方法を模索しています。`;
+// 趣味
+export const hobbyDescription = `・コーディング
+・読書
+・散歩
 
-// 経歴データ
-export const careerData: CareerPeriod[] = [
-  {
-    period: "2023年(令和5年) – 現在",
-    description: `WEB制作会社にてプログラマー兼Webデザイナーとして、
-コーポレートサイト、ECサイト、LPなど多様なWeb制作案件を多数担当。
-UI/UX設計からデザイン、フロントエンド開発（HTML/CSS/JavaScript/React）、
-バックエンド構築（PHP・AWS・Node.js）までワンストップで実装。
-WordPress構築や保守運用、SEO対策、広告計測設定などマーケティング施策も手掛け、
-デザインとエンジニアリングの両軸から成果につながるサイト改善を実現。
-クライアントのCV(コンバージョン)率向上や運用効率化に貢献。`,
-    achievements,
-  },
-  {
-    period: "2022年(令和4年)",
-    description: `ゼロから独学でプログラミングを習得。
-エンジニアリングの基盤を築いた後、ユーザー体験向上のためデザイン領域も独学で習得。
-継続的な学習意欲と自己成長力で、技術とデザインの両軸で価値創造できるエンジニアとしての道を切り開く。`,
-  },
-];
-
-// チーム開発の説明
-export const teamWorkDescription = `チーム開発において、Git/GitHubを使用したバージョン管理や
-コードレビューの経験があります。
-クライアントとの要件ヒアリングから実装、納品まで一貫して担当し、
-コミュニケーション能力を活かしたプロジェクト推進を実践しています。`;
-
-// 問題解決の説明
-export const problemSolvingDescription = `実務において、技術的な課題を解決し、
-クライアントのビジネス目標達成に貢献してきました。`;
+最新技術のキャッチアップやコーディングが日課です。
+そして読書（ジャンル不問でなんでも読みますが、特にミステリー）を愛しています。
+日々の学びをコーディングに落とし込み、ユーザー体験を向上させる実装を模索することに喜びを感じます。`;
 

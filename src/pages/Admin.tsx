@@ -123,18 +123,6 @@ export default function Admin() {
     }));
   };
 
-  // 将来の使用のために保持（現在は未使用）
-  // const handleArrayFieldChange = (field: string, value: string) => {
-  //   const lines = value.split('\n').filter(line => line.trim() !== '');
-  //   setFormData((prev) => ({
-  //     ...prev,
-  //     details: {
-  //       ...prev.details!,
-  //       [field]: lines,
-  //     },
-  //   }));
-  // };
-
   const handleArrayFieldAdd = (field: string) => {
     setFormData((prev) => ({
       ...prev,

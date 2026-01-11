@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { mainData } from "../data/main";
 
 interface SEOConfig {
   title: string;
@@ -19,7 +20,7 @@ export const useSEO = (config: SEOConfig) => {
       config;
 
     // タイトル設定
-    document.title = `${title} | WantToDev`;
+    document.title = `${title} | ${mainData.siteName}`;
 
     // メタディスクリプション設定
     if (description) {

@@ -29,6 +29,22 @@ npm install
 npm start
 ```
 
+## デプロイ
+
+### デプロイ先
+
+- **Netlify**: [https://wanttodev.com](https://wanttodev.com)
+
+### デプロイ方法
+
+```bash
+# 本番用ビルドを作成
+npm run build
+
+# Netlify CLIを使用する場合
+netlify deploy --prod
+```
+
 ## データ管理システム
 
 ### ファイル構造

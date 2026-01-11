@@ -47,7 +47,7 @@ export const usePerformanceMonitor = () => {
         const src = script.getAttribute('src');
         if (src && src.includes('static/js/')) {
           // 実際のサイズは取得できないため、ファイル名から推定
-          console.log('📦 読み込み済みスクリプト:', src);
+          console.log('読み込み済みスクリプト:', src);
         }
       });
     };
